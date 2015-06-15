@@ -1,0 +1,570 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		751785DE1B2E35C400C82C18 /* IGGeoGraphicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 751785DD1B2E35C400C82C18 /* IGGeoGraphicView.m */; };
+		7519B9C41B2D664B006BE59D /* IGGeoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7519B9C31B2D664B006BE59D /* IGGeoConfiguration.m */; };
+		75396C951B2C54E500A70B76 /* IGHGeoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75396C941B2C54E500A70B76 /* IGHGeoTableViewCell.m */; };
+		75396C991B2C6C1500A70B76 /* NSObject+ExtraProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 75396C971B2C6C1500A70B76 /* NSObject+ExtraProperties.m */; };
+		755F80BF1B29C06B00C35F99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80BE1B29C06B00C35F99 /* main.m */; };
+		755F80C21B29C06B00C35F99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80C11B29C06B00C35F99 /* AppDelegate.m */; };
+		755F80C51B29C06B00C35F99 /* IGGeo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 755F80C31B29C06B00C35F99 /* IGGeo.xcdatamodeld */; };
+		755F80C81B29C06B00C35F99 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80C71B29C06B00C35F99 /* ViewController.m */; };
+		755F80CB1B29C06B00C35F99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 755F80C91B29C06B00C35F99 /* Main.storyboard */; };
+		755F80CD1B29C06B00C35F99 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 755F80CC1B29C06B00C35F99 /* Images.xcassets */; };
+		755F80D01B29C06B00C35F99 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755F80CE1B29C06B00C35F99 /* LaunchScreen.xib */; };
+		755F80DC1B29C06C00C35F99 /* IGGeoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80DB1B29C06C00C35F99 /* IGGeoTests.m */; };
+		75B212CD1B2D7901005F49D5 /* IGNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */; };
+		75B212CE1B2D7901005F49D5 /* IGNodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */; };
+		75BF5AD11B2EED870047C3AD /* UIAlertController+Showable.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF5AD01B2EED870047C3AD /* UIAlertController+Showable.m */; };
+		75BF5AD51B2F1C100047C3AD /* IGLabelTextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF5AD31B2F1C100047C3AD /* IGLabelTextFieldViewController.m */; };
+		75BF5AD61B2F1C100047C3AD /* IGLabelTextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75BF5AD41B2F1C100047C3AD /* IGLabelTextFieldViewController.xib */; };
+		75D04E311B2CB71C006B3332 /* IGGeoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D04E301B2CB71C006B3332 /* IGGeoViewController.m */; };
+		75D04E341B2CD158006B3332 /* IGGeoStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D04E331B2CD158006B3332 /* IGGeoStoryboardSegue.m */; };
+		75DDAF751B2D9F1400952F25 /* IGNodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DDAF731B2D9F1400952F25 /* IGNodeTableViewCell.m */; };
+		75DDAF761B2D9F1400952F25 /* IGNodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75DDAF741B2D9F1400952F25 /* IGNodeTableViewCell.xib */; };
+		75E309571B2B935F0098296C /* IGCDPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E309561B2B935F0098296C /* IGCDPoint.m */; };
+		75E3095A1B2B935F0098296C /* IGCDHGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E309591B2B935F0098296C /* IGCDHGeo.m */; };
+		75E3095D1B2B935F0098296C /* IGCDCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E3095C1B2B935F0098296C /* IGCDCircle.m */; };
+		75E309601B2B935F0098296C /* IGCDAGeoStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E3095F1B2B935F0098296C /* IGCDAGeoStatus.m */; };
+		75E309631B2B935F0098296C /* IGCDConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E309621B2B935F0098296C /* IGCDConnection.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		755F80D61B29C06C00C35F99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 755F80B11B29C06A00C35F99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 755F80B81B29C06B00C35F99;
+			remoteInfo = IGGeo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		751785DC1B2E35C400C82C18 /* IGGeoGraphicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGGeoGraphicView.h; sourceTree = "<group>"; };
+		751785DD1B2E35C400C82C18 /* IGGeoGraphicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGGeoGraphicView.m; sourceTree = "<group>"; };
+		7519B9C21B2D664B006BE59D /* IGGeoConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGGeoConfiguration.h; sourceTree = "<group>"; };
+		7519B9C31B2D664B006BE59D /* IGGeoConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGGeoConfiguration.m; sourceTree = "<group>"; };
+		75396C931B2C54E500A70B76 /* IGHGeoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGHGeoTableViewCell.h; sourceTree = "<group>"; };
+		75396C941B2C54E500A70B76 /* IGHGeoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGHGeoTableViewCell.m; sourceTree = "<group>"; };
+		75396C971B2C6C1500A70B76 /* NSObject+ExtraProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+ExtraProperties.m"; path = "IGCategories/NSObject+ExtraProperties.m"; sourceTree = "<group>"; };
+		75396C981B2C6C1500A70B76 /* NSObject+ExtraProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+ExtraProperties.h"; path = "IGCategories/NSObject+ExtraProperties.h"; sourceTree = "<group>"; };
+		755F80B91B29C06B00C35F99 /* IGGeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGGeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		755F80BD1B29C06B00C35F99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755F80BE1B29C06B00C35F99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		755F80C01B29C06B00C35F99 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		755F80C11B29C06B00C35F99 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		755F80C41B29C06B00C35F99 /* IGGeo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IGGeo.xcdatamodel; sourceTree = "<group>"; };
+		755F80C61B29C06B00C35F99 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		755F80C71B29C06B00C35F99 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		755F80CA1B29C06B00C35F99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		755F80CC1B29C06B00C35F99 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		755F80CF1B29C06B00C35F99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		755F80D51B29C06C00C35F99 /* IGGeoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IGGeoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		755F80DA1B29C06C00C35F99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755F80DB1B29C06C00C35F99 /* IGGeoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGGeoTests.m; sourceTree = "<group>"; };
+		75B212CA1B2D7901005F49D5 /* IGNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGNodeViewController.h; sourceTree = "<group>"; };
+		75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGNodeViewController.m; sourceTree = "<group>"; };
+		75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGNodeViewController.xib; sourceTree = "<group>"; };
+		75BF5ACF1B2EED870047C3AD /* UIAlertController+Showable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAlertController+Showable.h"; path = "IGCategories/UIAlertController+Showable.h"; sourceTree = "<group>"; };
+		75BF5AD01B2EED870047C3AD /* UIAlertController+Showable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAlertController+Showable.m"; path = "IGCategories/UIAlertController+Showable.m"; sourceTree = "<group>"; };
+		75BF5AD21B2F1C100047C3AD /* IGLabelTextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGLabelTextFieldViewController.h; sourceTree = "<group>"; };
+		75BF5AD31B2F1C100047C3AD /* IGLabelTextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGLabelTextFieldViewController.m; sourceTree = "<group>"; };
+		75BF5AD41B2F1C100047C3AD /* IGLabelTextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGLabelTextFieldViewController.xib; sourceTree = "<group>"; };
+		75D04E2F1B2CB71C006B3332 /* IGGeoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGGeoViewController.h; sourceTree = "<group>"; };
+		75D04E301B2CB71C006B3332 /* IGGeoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGGeoViewController.m; sourceTree = "<group>"; };
+		75D04E321B2CD158006B3332 /* IGGeoStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGGeoStoryboardSegue.h; sourceTree = "<group>"; };
+		75D04E331B2CD158006B3332 /* IGGeoStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGGeoStoryboardSegue.m; sourceTree = "<group>"; };
+		75DDAF721B2D9F1400952F25 /* IGNodeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGNodeTableViewCell.h; sourceTree = "<group>"; };
+		75DDAF731B2D9F1400952F25 /* IGNodeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGNodeTableViewCell.m; sourceTree = "<group>"; };
+		75DDAF741B2D9F1400952F25 /* IGNodeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGNodeTableViewCell.xib; sourceTree = "<group>"; };
+		75E309551B2B935F0098296C /* IGCDPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDPoint.h; path = IGCD/IGCDPoint.h; sourceTree = "<group>"; };
+		75E309561B2B935F0098296C /* IGCDPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDPoint.m; path = IGCD/IGCDPoint.m; sourceTree = "<group>"; };
+		75E309581B2B935F0098296C /* IGCDHGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDHGeo.h; path = IGCD/IGCDHGeo.h; sourceTree = "<group>"; };
+		75E309591B2B935F0098296C /* IGCDHGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDHGeo.m; path = IGCD/IGCDHGeo.m; sourceTree = "<group>"; };
+		75E3095B1B2B935F0098296C /* IGCDCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDCircle.h; path = IGCD/IGCDCircle.h; sourceTree = "<group>"; };
+		75E3095C1B2B935F0098296C /* IGCDCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDCircle.m; path = IGCD/IGCDCircle.m; sourceTree = "<group>"; };
+		75E3095E1B2B935F0098296C /* IGCDAGeoStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDAGeoStatus.h; path = IGCD/IGCDAGeoStatus.h; sourceTree = "<group>"; };
+		75E3095F1B2B935F0098296C /* IGCDAGeoStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDAGeoStatus.m; path = IGCD/IGCDAGeoStatus.m; sourceTree = "<group>"; };
+		75E309611B2B935F0098296C /* IGCDConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDConnection.h; path = IGCD/IGCDConnection.h; sourceTree = "<group>"; };
+		75E309621B2B935F0098296C /* IGCDConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDConnection.m; path = IGCD/IGCDConnection.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		755F80B61B29C06B00C35F99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755F80D21B29C06C00C35F99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		75396C961B2C6B5500A70B76 /* IGCategories */ = {
+			isa = PBXGroup;
+			children = (
+				75396C971B2C6C1500A70B76 /* NSObject+ExtraProperties.m */,
+				75396C981B2C6C1500A70B76 /* NSObject+ExtraProperties.h */,
+				75BF5ACF1B2EED870047C3AD /* UIAlertController+Showable.h */,
+				75BF5AD01B2EED870047C3AD /* UIAlertController+Showable.m */,
+			);
+			name = IGCategories;
+			sourceTree = "<group>";
+		};
+		755F80B01B29C06A00C35F99 = {
+			isa = PBXGroup;
+			children = (
+				75E309641B2B936D0098296C /* IGCD */,
+				755F80BB1B29C06B00C35F99 /* IGGeo */,
+				75396C961B2C6B5500A70B76 /* IGCategories */,
+				755F80D81B29C06C00C35F99 /* IGGeoTests */,
+				755F80BA1B29C06B00C35F99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		755F80BA1B29C06B00C35F99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				755F80B91B29C06B00C35F99 /* IGGeo.app */,
+				755F80D51B29C06C00C35F99 /* IGGeoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		755F80BB1B29C06B00C35F99 /* IGGeo */ = {
+			isa = PBXGroup;
+			children = (
+				755F80C01B29C06B00C35F99 /* AppDelegate.h */,
+				755F80C11B29C06B00C35F99 /* AppDelegate.m */,
+				755F80C61B29C06B00C35F99 /* ViewController.h */,
+				755F80C71B29C06B00C35F99 /* ViewController.m */,
+				755F80C91B29C06B00C35F99 /* Main.storyboard */,
+				75B212CA1B2D7901005F49D5 /* IGNodeViewController.h */,
+				75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */,
+				75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */,
+				75DDAF721B2D9F1400952F25 /* IGNodeTableViewCell.h */,
+				75DDAF731B2D9F1400952F25 /* IGNodeTableViewCell.m */,
+				75DDAF741B2D9F1400952F25 /* IGNodeTableViewCell.xib */,
+				75D04E321B2CD158006B3332 /* IGGeoStoryboardSegue.h */,
+				75D04E331B2CD158006B3332 /* IGGeoStoryboardSegue.m */,
+				75D04E2F1B2CB71C006B3332 /* IGGeoViewController.h */,
+				75D04E301B2CB71C006B3332 /* IGGeoViewController.m */,
+				7519B9C21B2D664B006BE59D /* IGGeoConfiguration.h */,
+				7519B9C31B2D664B006BE59D /* IGGeoConfiguration.m */,
+				75396C931B2C54E500A70B76 /* IGHGeoTableViewCell.h */,
+				75396C941B2C54E500A70B76 /* IGHGeoTableViewCell.m */,
+				755F80CC1B29C06B00C35F99 /* Images.xcassets */,
+				755F80CE1B29C06B00C35F99 /* LaunchScreen.xib */,
+				755F80C31B29C06B00C35F99 /* IGGeo.xcdatamodeld */,
+				755F80BC1B29C06B00C35F99 /* Supporting Files */,
+				751785DC1B2E35C400C82C18 /* IGGeoGraphicView.h */,
+				751785DD1B2E35C400C82C18 /* IGGeoGraphicView.m */,
+				75BF5AD21B2F1C100047C3AD /* IGLabelTextFieldViewController.h */,
+				75BF5AD31B2F1C100047C3AD /* IGLabelTextFieldViewController.m */,
+				75BF5AD41B2F1C100047C3AD /* IGLabelTextFieldViewController.xib */,
+			);
+			path = IGGeo;
+			sourceTree = "<group>";
+		};
+		755F80BC1B29C06B00C35F99 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				755F80BD1B29C06B00C35F99 /* Info.plist */,
+				755F80BE1B29C06B00C35F99 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		755F80D81B29C06C00C35F99 /* IGGeoTests */ = {
+			isa = PBXGroup;
+			children = (
+				755F80DB1B29C06C00C35F99 /* IGGeoTests.m */,
+				755F80D91B29C06C00C35F99 /* Supporting Files */,
+			);
+			path = IGGeoTests;
+			sourceTree = "<group>";
+		};
+		755F80D91B29C06C00C35F99 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				755F80DA1B29C06C00C35F99 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		75E309641B2B936D0098296C /* IGCD */ = {
+			isa = PBXGroup;
+			children = (
+				75E309611B2B935F0098296C /* IGCDConnection.h */,
+				75E309621B2B935F0098296C /* IGCDConnection.m */,
+				75E3095E1B2B935F0098296C /* IGCDAGeoStatus.h */,
+				75E3095F1B2B935F0098296C /* IGCDAGeoStatus.m */,
+				75E3095B1B2B935F0098296C /* IGCDCircle.h */,
+				75E3095C1B2B935F0098296C /* IGCDCircle.m */,
+				75E309581B2B935F0098296C /* IGCDHGeo.h */,
+				75E309591B2B935F0098296C /* IGCDHGeo.m */,
+				75E309551B2B935F0098296C /* IGCDPoint.h */,
+				75E309561B2B935F0098296C /* IGCDPoint.m */,
+			);
+			name = IGCD;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		755F80B81B29C06B00C35F99 /* IGGeo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 755F80DF1B29C06C00C35F99 /* Build configuration list for PBXNativeTarget "IGGeo" */;
+			buildPhases = (
+				755F80B51B29C06B00C35F99 /* Sources */,
+				755F80B61B29C06B00C35F99 /* Frameworks */,
+				755F80B71B29C06B00C35F99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IGGeo;
+			productName = IGGeo;
+			productReference = 755F80B91B29C06B00C35F99 /* IGGeo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		755F80D41B29C06C00C35F99 /* IGGeoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 755F80E21B29C06C00C35F99 /* Build configuration list for PBXNativeTarget "IGGeoTests" */;
+			buildPhases = (
+				755F80D11B29C06C00C35F99 /* Sources */,
+				755F80D21B29C06C00C35F99 /* Frameworks */,
+				755F80D31B29C06C00C35F99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				755F80D71B29C06C00C35F99 /* PBXTargetDependency */,
+			);
+			name = IGGeoTests;
+			productName = IGGeoTests;
+			productReference = 755F80D51B29C06C00C35F99 /* IGGeoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		755F80B11B29C06A00C35F99 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Isidoro Ghezzi";
+				TargetAttributes = {
+					755F80B81B29C06B00C35F99 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					755F80D41B29C06C00C35F99 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 755F80B81B29C06B00C35F99;
+					};
+				};
+			};
+			buildConfigurationList = 755F80B41B29C06A00C35F99 /* Build configuration list for PBXProject "IGGeo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 755F80B01B29C06A00C35F99;
+			productRefGroup = 755F80BA1B29C06B00C35F99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				755F80B81B29C06B00C35F99 /* IGGeo */,
+				755F80D41B29C06C00C35F99 /* IGGeoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		755F80B71B29C06B00C35F99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75B212CE1B2D7901005F49D5 /* IGNodeViewController.xib in Resources */,
+				755F80CB1B29C06B00C35F99 /* Main.storyboard in Resources */,
+				755F80D01B29C06B00C35F99 /* LaunchScreen.xib in Resources */,
+				75DDAF761B2D9F1400952F25 /* IGNodeTableViewCell.xib in Resources */,
+				755F80CD1B29C06B00C35F99 /* Images.xcassets in Resources */,
+				75BF5AD61B2F1C100047C3AD /* IGLabelTextFieldViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755F80D31B29C06C00C35F99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		755F80B51B29C06B00C35F99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				751785DE1B2E35C400C82C18 /* IGGeoGraphicView.m in Sources */,
+				75DDAF751B2D9F1400952F25 /* IGNodeTableViewCell.m in Sources */,
+				755F80C21B29C06B00C35F99 /* AppDelegate.m in Sources */,
+				75E309631B2B935F0098296C /* IGCDConnection.m in Sources */,
+				75396C991B2C6C1500A70B76 /* NSObject+ExtraProperties.m in Sources */,
+				75E309571B2B935F0098296C /* IGCDPoint.m in Sources */,
+				75E309601B2B935F0098296C /* IGCDAGeoStatus.m in Sources */,
+				755F80C51B29C06B00C35F99 /* IGGeo.xcdatamodeld in Sources */,
+				755F80C81B29C06B00C35F99 /* ViewController.m in Sources */,
+				75E3095D1B2B935F0098296C /* IGCDCircle.m in Sources */,
+				755F80BF1B29C06B00C35F99 /* main.m in Sources */,
+				75BF5AD11B2EED870047C3AD /* UIAlertController+Showable.m in Sources */,
+				75D04E341B2CD158006B3332 /* IGGeoStoryboardSegue.m in Sources */,
+				75396C951B2C54E500A70B76 /* IGHGeoTableViewCell.m in Sources */,
+				75D04E311B2CB71C006B3332 /* IGGeoViewController.m in Sources */,
+				7519B9C41B2D664B006BE59D /* IGGeoConfiguration.m in Sources */,
+				75E3095A1B2B935F0098296C /* IGCDHGeo.m in Sources */,
+				75BF5AD51B2F1C100047C3AD /* IGLabelTextFieldViewController.m in Sources */,
+				75B212CD1B2D7901005F49D5 /* IGNodeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		755F80D11B29C06C00C35F99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				755F80DC1B29C06C00C35F99 /* IGGeoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		755F80D71B29C06C00C35F99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 755F80B81B29C06B00C35F99 /* IGGeo */;
+			targetProxy = 755F80D61B29C06C00C35F99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		755F80C91B29C06B00C35F99 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				755F80CA1B29C06B00C35F99 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		755F80CE1B29C06B00C35F99 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				755F80CF1B29C06B00C35F99 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		755F80DD1B29C06C00C35F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		755F80DE1B29C06C00C35F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		755F80E01B29C06C00C35F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IGGeo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		755F80E11B29C06C00C35F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = IGGeo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		755F80E31B29C06C00C35F99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = IGGeoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IGGeo.app/IGGeo";
+			};
+			name = Debug;
+		};
+		755F80E41B29C06C00C35F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = IGGeoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IGGeo.app/IGGeo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		755F80B41B29C06A00C35F99 /* Build configuration list for PBXProject "IGGeo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				755F80DD1B29C06C00C35F99 /* Debug */,
+				755F80DE1B29C06C00C35F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		755F80DF1B29C06C00C35F99 /* Build configuration list for PBXNativeTarget "IGGeo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				755F80E01B29C06C00C35F99 /* Debug */,
+				755F80E11B29C06C00C35F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		755F80E21B29C06C00C35F99 /* Build configuration list for PBXNativeTarget "IGGeoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				755F80E31B29C06C00C35F99 /* Debug */,
+				755F80E41B29C06C00C35F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		755F80C31B29C06B00C35F99 /* IGGeo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				755F80C41B29C06B00C35F99 /* IGGeo.xcdatamodel */,
+			);
+			currentVersion = 755F80C41B29C06B00C35F99 /* IGGeo.xcdatamodel */;
+			path = IGGeo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 755F80B11B29C06A00C35F99 /* Project object */;
+}
