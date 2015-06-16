@@ -186,7 +186,7 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
     // CGContextStrokeEllipseInRect(theContext, CGRectMake(theOrigin.x-theRadius, theOrigin.y-theRadius, 2*theRadius, 2*theRadius));
 }
 
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
+- (void)drawLayerPrivate:(CALayer *)layer inContext:(CGContextRef)context {
     NSLog (@"%s - layer.frame: %@", __PRETTY_FUNCTION__, NSStringFromCGRect(layer.frame));
     CGContextSaveGState(context);
     // [self drawMonoscopioInContext:context inRect:layer.frame];
@@ -230,6 +230,13 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
 
 #endif
     CGContextRestoreGState(context);
+}
+
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
+    const CFAbsoluteTime aBegin = CFAbsoluteTimeGetCurrent ();
+    [self drawLayerPrivate:layer inContext:context];
+    const CFAbsoluteTime aDeltaInside = CFAbsoluteTimeGetCurrent () - aBegin;
+    NSLog (@"%s - aDeltaInside: %@", __PRETTY_FUNCTION__, @(aDeltaInside * 1000).stringValue);
 }
 
 - (void)didReceiveMemoryWarning {
