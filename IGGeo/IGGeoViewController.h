@@ -12,5 +12,5 @@
 @interface IGGeoViewController : UIViewController <UIScrollViewDelegate>
 @property (strong, nonatomic) NSDictionary *fInfo;
 @property (strong, nonatomic) ViewController *fPresentingViewController;
-- (void) updateUI;
+- (void) updateUI_async;
 @end

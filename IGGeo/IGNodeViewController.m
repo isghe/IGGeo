@@ -93,7 +93,7 @@
     [self.fRootViewController geoDeleteCircle:aCircle];
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
-    [self.fGeoViewController updateUI];
+    [self.fGeoViewController updateUI_async];
 }
 
 - (void) actionSelectCircle: (UISwitch *) theSwitch{
@@ -119,7 +119,7 @@
     
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
-    [self.fGeoViewController updateUI];
+    [self.fGeoViewController updateUI_async];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -179,7 +179,7 @@
     NSLog (@"%s - %@ %@; aFlagPleaseSave: %@", __PRETTY_FUNCTION__, aCircle.circle_pt_point.description, aCircle.description, @(aFlagPleaseSave));
     if (aFlagPleaseSave){
         [self.fRootViewController geoSave];
-        [self.fGeoViewController updateUI];
+        [self.fGeoViewController updateUI_async];
     }
 }
 
