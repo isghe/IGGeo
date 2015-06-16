@@ -204,7 +204,7 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
         const CGPoint aOriginZoom = CGPointMake (aOrigin.x/kZoomWidth, aOrigin.y/kZoomHeight);
         const CGFloat aRadiusZoom = aRadius/kZoomWidth;
         NSArray * aColorArray = @[[UIColor blackColor], [UIColor greenColor]];
-        const BOOL aSelected = [aCircle.circle_pt_status.circle_status_description isEqual:[self.fPresentingViewController geoCircleStatus:eCircleStatusSelected].circle_status_description];
+        const BOOL aSelected = [aCircle.circle_pt_status.circle_status_description isEqual:[[self.fPresentingViewController class]circleStatusToNSString:eCircleStatusSelected]];
         UIColor * aColor = aColorArray [aSelected];
         [self drawCircleInContext: context atOrigin:aOriginZoom withRadius:aRadiusZoom andColor: aColor];
     }
@@ -221,7 +221,7 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
         const CGPoint aOriginZoom2 = CGPointMake (aOrigin2.x/kZoomWidth, aOrigin2.y/kZoomHeight);
         const CGPoint aSegment []={aOriginZoom1, aOriginZoom2};
         NSArray * aColorArray = @[[UIColor grayColor], [UIColor redColor]];
-        const BOOL aSelected = [aConnection.connection_pt_circle1.circle_pt_status.circle_status_description isEqual:[self.fPresentingViewController geoCircleStatus:eCircleStatusSelected].circle_status_description];
+        const BOOL aSelected = [aConnection.connection_pt_circle1.circle_pt_status.circle_status_description isEqual:[[self.fPresentingViewController class]circleStatusToNSString:eCircleStatusSelected]];
         IGDrawSegment(context, aSegment);
         UIColor * aColor = aColorArray [aSelected];
         CGContextSetStrokeColorWithColor(context, aColor.CGColor);

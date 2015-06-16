@@ -31,5 +31,6 @@ typedef enum{
 - (NSUInteger) geoConnectionsCountInGeo: (IGCDHGeo *) theGeo;
 - (NSArray *) geoConnectionsInGeo: (IGCDHGeo *) theGeo;
 - (IGCDACircleStatus *) geoCircleStatus: (ECircleStatus) theCircleStatus;
++ (NSString *) circleStatusToNSString:(ECircleStatus) theCircleStatus;
 
 @end

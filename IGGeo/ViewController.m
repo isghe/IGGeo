@@ -197,7 +197,7 @@
     return [self geoLoadEntityWithName:@"IGCDACircleStatus"];
 }
 
-static NSString * IGCircleStatusToNSString (const ECircleStatus theCircleStatus){
++ (NSString *) circleStatusToNSString:(ECircleStatus) theCircleStatus{
     /*
      eCircleStatusNotSelected,
      eCircleStatusSelected
@@ -210,7 +210,7 @@ static NSString * IGCircleStatusToNSString (const ECircleStatus theCircleStatus)
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"IGCDACircleStatus" inManagedObjectContext:self.managedObjectContext];
-    NSPredicate * aPredicate = [NSPredicate predicateWithFormat:@"circle_status_description = %@", IGCircleStatusToNSString (theCircleStatus)];
+    NSPredicate * aPredicate = [NSPredicate predicateWithFormat:@"circle_status_description = %@", [[self class]circleStatusToNSString:theCircleStatus]];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:aPredicate];
     
