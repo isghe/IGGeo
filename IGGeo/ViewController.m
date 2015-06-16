@@ -85,27 +85,37 @@
     NSParameterAssert(nil == self.managedObjectContext);
     NSParameterAssert(nil == self.persistentStoreCoordinator);
     NSArray * aArray = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSLog (@"%s - aArray: %@", __PRETTY_FUNCTION__, aArray.description);
+
     NSURL *aURLUserDomain = aArray [0];
     // set up ManagedObjectModel
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"IGGeo" withExtension:@"momd"];
-    self->_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    NSLog (@"%s - entities: %@", __PRETTY_FUNCTION__, self.managedObjectModel.entities.description);
-    NSArray * aEntityNames = self.entityNames;
-    NSLog (@"%s - aEntityNames: %@", __PRETTY_FUNCTION__, aEntityNames);
-   
+    NSManagedObjectModel * aManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
     // set up PersistentStore
     NSURL *storeURL = [aURLUserDomain URLByAppendingPathComponent:@"Card.sqlite"];
     NSError *error = nil;
-    self->_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
-    if (![self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    NSPersistentStoreCoordinator * aPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:aManagedObjectModel];
+
+    NSParameterAssert(nil == self.managedObjectModel);
+    NSParameterAssert(nil == self.managedObjectContext);
+    NSParameterAssert(nil == self.persistentStoreCoordinator);
+    if (![aPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         [self IGHandleError:error];
-        abort();
     }
-    // set up managedObjectContext
-    self->_managedObjectContext = [[NSManagedObjectContext alloc]init];
-    [self.managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    else{
+        // set up managedObjectContext
+        NSManagedObjectContext * aManagedObjectContext = [[NSManagedObjectContext alloc]init];
+        [aManagedObjectContext setPersistentStoreCoordinator:aPersistentStoreCoordinator];
+        NSParameterAssert(nil == self.managedObjectModel);
+        NSParameterAssert(nil == self.managedObjectContext);
+        NSParameterAssert(nil == self.persistentStoreCoordinator);
+
+        self->_managedObjectModel = aManagedObjectModel;
+        self->_managedObjectContext = aManagedObjectContext;
+        self->_persistentStoreCoordinator = aPersistentStoreCoordinator;
+    }
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
