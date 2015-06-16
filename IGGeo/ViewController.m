@@ -383,7 +383,24 @@
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"IGCDConnection" inManagedObjectContext:self.managedObjectContext];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"connection_pt_circle1 == %@", theCircle];
-    
+
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (nil == fetchedObjects){
+        [self IGHandleError:error];
+    }
+    return fetchedObjects;
+}
+
+- (NSArray *) geoConnectionsTo: (IGCDCircle *) theCircle{
+    NSParameterAssert(nil != theCircle);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"IGCDConnection" inManagedObjectContext:self.managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"connection_pt_circle2 == %@", theCircle];
+
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
@@ -415,6 +432,11 @@
     NSParameterAssert(nil != theCircle);
     NSArray * aConnections = [self geoConnections:theCircle];
     for (IGCDConnection * aConnection in aConnections){
+        [self.managedObjectContext deleteObject:aConnection];
+    }
+
+    NSArray * aConnectionsTo = [self geoConnectionsTo:theCircle];
+    for (IGCDConnection * aConnection in aConnectionsTo){
         [self.managedObjectContext deleteObject:aConnection];
     }
     [self.managedObjectContext deleteObject:theCircle.circle_pt_point];
