@@ -217,10 +217,7 @@
                                           inManagedObjectContext:self.managedObjectContext];
         aStatus.geo_status_description = aString;
     }
-    NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
-    }
+    [self geoSave];
 }
 
 - (IBAction)actionInsert:(id)sender {
@@ -243,10 +240,7 @@
                                    inManagedObjectContext:context];
         aGeo.dateTimeInsert = [[NSDate alloc] init];
         aGeo.geo_pt_status = aStatus;
-
-        if (![context save:&error]) {
-            [self IGHandleError:error];
-       }
+        [self geoSave];
     }
     else{
         [self IGHandleError:error];
@@ -263,23 +257,18 @@
         NSError *error = nil;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if(nil != fetchedObjects){
-            for (NSManagedObject *aManagedObject in fetchedObjects) {
-                [aManagedObjectsToDelete addObject:aManagedObject];
-            }
+            [aManagedObjectsToDelete addObjectsFromArray:fetchedObjects];
         }
         else{
             [self IGHandleError:error];
         }
     }
-    NSLog (@"%s - %@", __PRETTY_FUNCTION__, aManagedObjectsToDelete);
+    // NSLog (@"%s - %@", __PRETTY_FUNCTION__, aManagedObjectsToDelete);
     for (NSManagedObject *aManagedObject in aManagedObjectsToDelete){
         [self.managedObjectContext deleteObject:aManagedObject];
     }
 
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
-    }
+    [self geoSave];
     [self.fTableViewHGeo reloadData];
     [self enableControls];
 }
@@ -304,11 +293,7 @@
     NSParameterAssert([aInfo [@"geo"] isKindOfClass:[IGCDHGeo class]]);
     IGCDHGeo * aGeo = aInfo [@"geo"];
     [self geoDeleteGeo:aGeo];
-
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
-    }
+    [self geoSave];
     [self.fTableViewHGeo reloadData];
     [self enableControls];
 }
