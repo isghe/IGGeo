@@ -93,6 +93,7 @@
     [self.fRootViewController geoDeleteCircle:aCircle];
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
+    [self.fGeoViewController updateUI];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -154,7 +155,6 @@
         [self.fRootViewController geoSave];
         [self.fGeoViewController updateUI];
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(IGNodeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
