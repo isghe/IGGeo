@@ -41,9 +41,14 @@
 - (void) IGHandleError: (NSError *) theError{
     NSParameterAssert(nil != theError);
     NSLog (@"%s - error: %@, %@", __PRETTY_FUNCTION__, theError, [theError userInfo]);
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"IGGeo error"
-                                                                   message:theError.localizedDescription
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    NSMutableArray * aMessages = [[NSMutableArray alloc] init];
+    [aMessages addObject:theError.localizedDescription];
+    if (nil != theError.userInfo && nil != theError.userInfo[@"reason"]){
+        [aMessages addObject: theError.userInfo[@"reason"]];
+    }
+    NSString * aMessage = [aMessages componentsJoinedByString:@";\n"];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"IGGeo error" message:aMessage preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {}];
