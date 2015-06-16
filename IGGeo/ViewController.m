@@ -144,6 +144,7 @@
 - (IBAction)actionPopulate:(id)sender {
     [self populateGeoStatus];
     [self populateCircleStatus];
+    [self geoSave];
     [self enableControls];
 }
 
@@ -171,7 +172,7 @@
     [aResult addObject:@{@"entity": @"SIGMA", @"count": @(aSigma)}];
     NSLog (@"%s - aResult: %@", __PRETTY_FUNCTION__, aResult);
 }
-
+/*
 - (IBAction)actionSelectOld:(id)sender {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -187,9 +188,43 @@
     [self.fTableViewHGeo reloadData];
     [self enableControls];
 }
-
+*/
 - (NSArray *) loadGeoStatus{
     return [self geoLoadEntityWithName:@"IGCDAGeoStatus"];
+}
+
+- (NSArray *) loadCircleStatus{
+    return [self geoLoadEntityWithName:@"IGCDACircleStatus"];
+}
+
+static NSString * IGCircleStatusToNSString (const ECircleStatus theCircleStatus){
+    /*
+     eCircleStatusNotSelected,
+     eCircleStatusSelected
+     */
+    NSArray * aArray = @[@"eCircleStatusNotSelected", @"eCircleStatusSelected"];
+    return aArray [theCircleStatus];
+}
+
+- (IGCDACircleStatus *) geoCircleStatus: (ECircleStatus) theCircleStatus{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"IGCDACircleStatus" inManagedObjectContext:self.managedObjectContext];
+    NSPredicate * aPredicate = [NSPredicate predicateWithFormat:@"circle_status_description = %@", IGCircleStatusToNSString (theCircleStatus)];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:aPredicate];
+    
+    NSError *error = nil;
+    IGCDACircleStatus * aStatus = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (nil != fetchedObjects){
+        NSAssert (fetchedObjects.count == 1, @"fetchedObjects.count == 1");
+        aStatus = fetchedObjects [0];
+    }
+    else{
+        [self IGHandleError:error];
+    }
+    return aStatus;
 }
 
 #pragma mark - populate
@@ -202,21 +237,22 @@
                                           inManagedObjectContext:self.managedObjectContext];
         aStatus.geo_status_description = aString;
     }
-    [self geoSave];
 }
 
 - (IBAction) populateCircleStatus{
-    NSParameterAssert(0 == [self loadGeoStatus].count);
-    NSArray * aArray = @[@"selected", @"not_selected"];
+/*
+ typedef enum{
+ eCircleStatusNotSelected,
+ eCircleStatusSelected
+ } ECircleStatus;
+*/
+    NSParameterAssert(0 == [self loadCircleStatus].count);
+    NSArray * aArray = @[@"eCircleStatusNotSelected", @"eCircleStatusSelected"];
     for (NSString * aString in aArray){
         IGCDACircleStatus *aStatus = [NSEntityDescription
                                    insertNewObjectForEntityForName:@"IGCDACircleStatus"
                                    inManagedObjectContext:self.managedObjectContext];
         aStatus.circle_status_description = aString;
-    }
-    NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
     }
 }
 
@@ -356,20 +392,23 @@
     }
     return fetchedObjects;
 }
-- (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin andRadious: (CGFloat) theRadious{
+
+- (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin radious: (CGFloat) theRadious andStatus: (ECircleStatus) theStatus{
     NSParameterAssert(nil != theGeo);
-    
-    IGCDPoint *aPoint = [NSEntityDescription
+    NSParameterAssert(nil != theGeo);
+    IGCDACircleStatus * aStatus = [self geoCircleStatus:theStatus];
+    IGCDPoint * aPoint = [NSEntityDescription
                       insertNewObjectForEntityForName:@"IGCDPoint"
                       inManagedObjectContext:self.managedObjectContext];
     aPoint.x = @(theOrigin.x);
     aPoint.y = @(theOrigin.y);
-    IGCDCircle *aCircle = [NSEntityDescription
+    IGCDCircle * aCircle = [NSEntityDescription
                          insertNewObjectForEntityForName:@"IGCDCircle"
                          inManagedObjectContext:self.managedObjectContext];
     aCircle.radius = @(theRadious);
     aCircle.circle_pt_point = aPoint;
     aCircle.circle_pt_geo = theGeo;
+    aCircle.circle_pt_status = aStatus;
     return aCircle;
 }
 
@@ -547,7 +586,7 @@
             NSNumber * aY = aCircle [@"y"];
             NSNumber * aRadious = aCircle [@"r"];
             const CGPoint aOrigin = CGPointMake(aX.floatValue, aY.floatValue);
-            IGCDCircle * aCDCircle = [self geoInsertCircle:theGeo withOrigin:aOrigin andRadious:aRadious.floatValue];
+            IGCDCircle * aCDCircle = [self geoInsertCircle:theGeo withOrigin:aOrigin radious:aRadious.floatValue andStatus: eCircleStatusNotSelected];
             [aCDCircleArray addObject:@{@"circle": aCDCircle, @"connections": aCircle [@"l"]}];
         }
 

@@ -69,7 +69,7 @@
 }
 
 - (IBAction)actionAdd:(id)sender {
-    [self.fRootViewController geoInsertCircle:self.fInfo [@"geo"] withOrigin:CGPointZero andRadious:0];
+    [self.fRootViewController geoInsertCircle:self.fInfo [@"geo"] withOrigin:CGPointZero radious:0 andStatus:eCircleStatusNotSelected];
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
 }
@@ -91,6 +91,32 @@
     }
 #endif
     [self.fRootViewController geoDeleteCircle:aCircle];
+    [self.fRootViewController geoSave];
+    [self.fNodeTableViewController reloadData];
+    [self.fGeoViewController updateUI];
+}
+
+- (void) actionSelectCircle: (UISwitch *) theSwitch{
+    NSDictionary * aInfo = theSwitch.superview.extraProperties [@"ig_geo"];
+    NSParameterAssert([aInfo [@"circle"] isKindOfClass:[IGCDCircle class]]);
+    IGCDCircle * aCircle = aInfo [@"circle"];
+#if DEBUG
+    {
+        NSIndexPath * aIndexPath = aInfo [@"index_path"];
+        IGCDCircle * aCircle3 = [self.fRootViewController geoCircles:self.fInfo [@"geo"]][aIndexPath.row];
+        IGCDCircle * aCircle2 = self.fIndexPathDictionary [aIndexPath];
+        NSParameterAssert(aCircle == aCircle2 && aCircle == aCircle3);
+        NSParameterAssert([aCircle isEqual:aCircle2] && [aCircle isEqual:aCircle3]);
+    }
+#endif
+    NSLog (@"%s - theSwitch.isON: %@", __PRETTY_FUNCTION__, @(theSwitch.isOn));
+    if (theSwitch.isOn){
+        aCircle.circle_pt_status = [self.fRootViewController geoCircleStatus:eCircleStatusSelected];
+    }
+    else{
+        aCircle.circle_pt_status = [self.fRootViewController geoCircleStatus:eCircleStatusNotSelected];
+    }
+    
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
     [self.fGeoViewController updateUI];
@@ -188,7 +214,9 @@
         aController.fTextField.extraProperties [@"ig_geo"] = @{@"circle": aCircle, @"number": aNumber, @"key": aKey};
     }
     [cell.fButtonDelete addTarget:self action:@selector(actionDeleteCircle:) forControlEvents:UIControlEventTouchUpInside];
-   
+    [cell.fSwitchSelector addTarget:self action:@selector(actionSelectCircle:) forControlEvents:UIControlEventTouchUpInside];
+    const BOOL aSelected = [aCircle.circle_pt_status.circle_status_description isEqual:[self.fRootViewController geoCircleStatus:eCircleStatusSelected].circle_status_description];
+    [cell.fSwitchSelector setOn: aSelected];
     // NSLog(@"%s - aString: %@, %p", __PRETTY_FUNCTION__, aString, cell.fHeader);
     // cell.textLabel.text = [NSString stringWithFormat:@"test %@", @(indexPath.row +1)];
 }

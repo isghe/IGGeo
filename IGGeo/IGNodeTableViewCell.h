@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIView *fSuperY;
 @property (weak, nonatomic) IBOutlet UIView *fSuperR;
 @property (readonly, strong, nonatomic) NSMutableDictionary *fLabelInputControllers;
+@property (weak, nonatomic) IBOutlet UISwitch *fSwitchSelector;
 @end
