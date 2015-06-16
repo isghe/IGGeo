@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *fScrollerView;
 @property (strong, nonatomic) CALayer * fLayer;
 @property (strong, nonatomic) UIView * fGraph;
+@property (readonly, strong, nonatomic) NSArray * fConnections;
 @end
 
 @implementation IGGeoViewController
@@ -35,16 +36,15 @@
     IGCDHGeo * aGeo = self.fInfo [@"geo"];
     NSIndexPath * aIndexPath = self.fInfo [@"index_path"];
     const NSUInteger aCirclesCount = [self.fPresentingViewController geoCircles:aGeo].count;
-    const NSUInteger aConnectionsCount = [self.fPresentingViewController geoConnectionsCountInGeo:aGeo];
-    typeof(self) __block bSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        bSelf.fHeader.text = [NSString stringWithFormat: @"%@ - %@; Circles: %@, Connections: %@", @(aIndexPath.row +1), aGeo.dateTimeInsert.description, @(aCirclesCount), @(aConnectionsCount)];
-    });
+    self->_fConnections = [self.fPresentingViewController geoConnectionsInGeo:aGeo];
+    const NSUInteger aConnectionsCount = self.fConnections.count;
+    self.fHeader.text = [NSString stringWithFormat: @"%@ - %@; Circles: %@, Connections: %@", @(aIndexPath.row +1), aGeo.dateTimeInsert.description, @(aCirclesCount), @(aConnectionsCount)];
 }
 
 static BOOL IGIsValidBoundingBox (const CGRect theRect){
     return !CGRectIsEmpty(theRect) && (0.0 != theRect.size.width) &&(0.0 != theRect.size.height);
 }
+
 - (void) updateGraph{
     // graph
     IGCDHGeo * aGeo = self.fInfo [@"geo"];
@@ -127,13 +127,19 @@ static CGRect CalculateBoundingBox (NSArray * theCircles){
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.fHeader.text = @"loading...";
-    typeof(self) __block bSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [bSelf updateHeader];
-    });
+
+    [self updateHeader];
     [self updateGraph];
 }
-
+/*
+-(void)viewWillAppear:(BOOL)animated
+{
+    if (self.fLayer) {
+        self.fLayer.delegate = nil;
+    }
+    self.fLayer = nil;
+}
+ */
 -(void)viewWillDisappear:(BOOL)animated
 {
     if (self.fLayer) {
@@ -188,6 +194,7 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
 
 - (void)drawLayerPrivate:(CALayer *)layer inContext:(CGContextRef)context {
     NSLog (@"%s - layer.frame: %@", __PRETTY_FUNCTION__, NSStringFromCGRect(layer.frame));
+    NSParameterAssert(nil != self.fConnections);
     CGContextSaveGState(context);
     // [self drawMonoscopioInContext:context inRect:layer.frame];
 #if 1
@@ -196,7 +203,6 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
     const CGFloat kZoomWidth = self->fBoundingBox.size.width/layer.frame.size.width;
     const CGFloat kZoomHeight = self->fBoundingBox.size.height/layer.frame.size.height;
     NSLog (@"%s - kZoomWidth: %@; kZoomHeight: %@", __PRETTY_FUNCTION__, @(kZoomWidth), @(kZoomHeight));
-    
     for (IGCDCircle * aCircle in aCircleArray){
         const CGPoint aOriginR = geoCircleOrigin (aCircle);
         const CGPoint aOrigin = CGPointMake (aOriginR.x - self->fBoundingBox.origin.x, aOriginR.y - self->fBoundingBox.origin.y);
@@ -208,9 +214,8 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
         UIColor * aColor = aColorArray [aSelected];
         [self drawCircleInContext: context atOrigin:aOriginZoom withRadius:aRadiusZoom andColor: aColor];
     }
-    
-    NSArray * aConnectionArray = [self.fPresentingViewController geoConnectionsInGeo:self.fInfo [@"geo"]];
-    
+    NSArray * aConnectionArray = self.fConnections;
+
     for (IGCDConnection * aConnection in aConnectionArray){
         const CGPoint aOriginR1 = geoCircleOrigin (aConnection.connection_pt_circle1);
         const CGPoint aOrigin1 = CGPointMake (aOriginR1.x - self->fBoundingBox.origin.x, aOriginR1.y - self->fBoundingBox.origin.y);
@@ -227,7 +232,6 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
         CGContextSetStrokeColorWithColor(context, aColor.CGColor);
         CGContextStrokePath(context);
     }
-
 #endif
     CGContextRestoreGState(context);
 }
