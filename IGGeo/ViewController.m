@@ -17,6 +17,7 @@
 #import "IGCDCircle.h"
 #import "IGCDConnection.h"
 #import "UIAlertController+Showable.h"
+#import "IGCDACircleStatus.h"
 
 @interface ViewController ()
 
@@ -126,7 +127,8 @@
 }
 
 - (IBAction)actionPopulate:(id)sender {
-    [self insertGeoStatus];
+    [self populateGeoStatus];
+    [self populateCircleStatus];
     [self enableControls];
 }
 
@@ -193,7 +195,8 @@
     return fetchedObjects;
 }
 
-- (IBAction)insertGeoStatus{
+#pragma mark - populate
+- (IBAction) populateGeoStatus{
     NSParameterAssert(0 == [self loadGeoStatus].count);
     NSArray * aArray = @[@"undefined", @"normal", @"deleted"];
     for (NSString * aString in aArray){
@@ -201,6 +204,21 @@
                                           insertNewObjectForEntityForName:@"IGCDAGeoStatus"
                                           inManagedObjectContext:self.managedObjectContext];
         aStatus.geo_status_description = aString;
+    }
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        [self IGHandleError:error];
+    }
+}
+
+- (IBAction) populateCircleStatus{
+    NSParameterAssert(0 == [self loadGeoStatus].count);
+    NSArray * aArray = @[@"selected", @"not_selected"];
+    for (NSString * aString in aArray){
+        IGCDACircleStatus *aStatus = [NSEntityDescription
+                                   insertNewObjectForEntityForName:@"IGCDACircleStatus"
+                                   inManagedObjectContext:self.managedObjectContext];
+        aStatus.circle_status_description = aString;
     }
     NSError *error;
     if (![self.managedObjectContext save:&error]) {

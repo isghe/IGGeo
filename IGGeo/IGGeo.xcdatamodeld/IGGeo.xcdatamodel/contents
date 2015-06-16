@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="IGCDACircleStatus" representedClassName="IGCDACircleStatus" syncable="YES">
+        <attribute name="circle_status_description" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="IGCDAGeoStatus" representedClassName="IGCDAGeoStatus" syncable="YES">
         <attribute name="geo_status_description" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -7,6 +10,7 @@
         <attribute name="radius" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="circle_pt_geo" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="IGCDHGeo" syncable="YES"/>
         <relationship name="circle_pt_point" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDPoint" syncable="YES"/>
+        <relationship name="circle_pt_status" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDACircleStatus" syncable="YES"/>
     </entity>
     <entity name="IGCDConnection" representedClassName="IGCDConnection" syncable="YES">
         <relationship name="connection_pt_circle1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDCircle" syncable="YES"/>
@@ -22,9 +26,10 @@
     </entity>
     <elements>
         <element name="IGCDAGeoStatus" positionX="144" positionY="0" width="128" height="58"/>
-        <element name="IGCDCircle" positionX="-47" positionY="116" width="128" height="88"/>
+        <element name="IGCDCircle" positionX="-47" positionY="116" width="128" height="103"/>
         <element name="IGCDConnection" positionX="-270" positionY="203" width="128" height="73"/>
         <element name="IGCDHGeo" positionX="-36" positionY="-9" width="128" height="73"/>
         <element name="IGCDPoint" positionX="135" positionY="170" width="128" height="73"/>
+        <element name="IGCDACircleStatus" positionX="-72" positionY="302" width="128" height="58"/>
     </elements>
 </model>
