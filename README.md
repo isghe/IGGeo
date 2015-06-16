@@ -8,12 +8,12 @@ Features:
 * Fetch geo data from URL;
 * Drawing graphics;
 * Listing Circles in UITableView;
-* Add, edit and delete circles to current geo;
+* Add, edit and delete circles in current geo;
 * Circles are selectable in List.
 
 Technical:
 * Model is persistent using NSCoreData;
-* Graphics drawing is done in CALayer using QuartzCore;
+* Graphics drawing is done asynchronously in a CALayer using QuartzCore;
 
 Todo:
 * some things;
