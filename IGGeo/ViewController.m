@@ -148,16 +148,7 @@
 }
 
 - (NSArray *) loadHGeo{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"IGCDHGeo" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSError *error = nil;
-    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if (nil == fetchedObjects){
-        [self IGHandleError:error];
-    }
-    return fetchedObjects;
+    return [self geoLoadEntityWithName:@"IGCDHGeo"];
 }
 
 - (IBAction)actionSelect:(id)sender {
@@ -198,16 +189,7 @@
 }
 
 - (NSArray *) loadGeoStatus{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"IGCDAGeoStatus" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSError *error = nil;
-    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if (nil == fetchedObjects){
-        [self IGHandleError:error];
-    }
-    return fetchedObjects;
+    return [self geoLoadEntityWithName:@"IGCDAGeoStatus"];
 }
 
 #pragma mark - populate
@@ -361,6 +343,19 @@
 #endif
 
 #pragma mark - geo
+- (NSArray *) geoLoadEntityWithName: (NSString *) theEntityName{
+    NSParameterAssert(nil != theEntityName);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:theEntityName inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (nil == fetchedObjects){
+        [self IGHandleError:error];
+    }
+    return fetchedObjects;
+}
 - (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin andRadious: (CGFloat) theRadious{
     NSParameterAssert(nil != theGeo);
     
