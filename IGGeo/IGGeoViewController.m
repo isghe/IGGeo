@@ -24,6 +24,7 @@
 @property (strong, nonatomic) CALayer * fLayer;
 @property (strong, nonatomic) UIView * fGraph;
 @property (readonly, strong, nonatomic) NSArray * fConnections;
+@property (readonly, strong, nonatomic) NSArray * fCircles;
 @end
 
 @implementation IGGeoViewController
@@ -32,10 +33,20 @@
     [self updateHeader];
     [self updateGraph];
 }
+
+- (void) updateUI_async{
+    typeof(self) __block bSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [bSelf updateUI];
+        });
+    });
+}
 - (void) updateHeader{
     IGCDHGeo * aGeo = self.fInfo [@"geo"];
     NSIndexPath * aIndexPath = self.fInfo [@"index_path"];
-    const NSUInteger aCirclesCount = [self.fPresentingViewController geoCircles:aGeo].count;
+    self->_fCircles = [self.fPresentingViewController geoCircles:aGeo];
+    const NSUInteger aCirclesCount = self->_fCircles.count;
     self->_fConnections = [self.fPresentingViewController geoConnectionsInGeo:aGeo];
     const NSUInteger aConnectionsCount = self.fConnections.count;
     self.fHeader.text = [NSString stringWithFormat: @"%@ - %@; Circles: %@, Connections: %@", @(aIndexPath.row +1), aGeo.dateTimeInsert.description, @(aCirclesCount), @(aConnectionsCount)];
@@ -47,8 +58,7 @@ static BOOL IGIsValidBoundingBox (const CGRect theRect){
 
 - (void) updateGraph{
     // graph
-    IGCDHGeo * aGeo = self.fInfo [@"geo"];
-    NSArray * aCircles = [self.fPresentingViewController geoCircles:aGeo];
+    NSArray * aCircles = self.fCircles;
     const CGRect aBoundingBox = CalculateBoundingBox (aCircles);
     self->fBoundingBox = aBoundingBox;
     NSLog (@"%s - aBoundingBox: %@; isValid: %@", __PRETTY_FUNCTION__, NSStringFromCGRect(aBoundingBox), @(IGIsValidBoundingBox(aBoundingBox)));
@@ -127,9 +137,7 @@ static CGRect CalculateBoundingBox (NSArray * theCircles){
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.fHeader.text = @"loading...";
-
-    [self updateHeader];
-    [self updateGraph];
+    [self updateUI_async];
 }
 /*
 -(void)viewWillAppear:(BOOL)animated
@@ -148,6 +156,10 @@ static CGRect CalculateBoundingBox (NSArray * theCircles){
     self.fLayer = nil;
 }
 #pragma mark - CALayerDelegate
+
+#ifdef IG_DIM_OF_ARRAY
+#error "IG_DIM_OF_ARRAY already defined"
+#endif
 
 #define IG_DIM_OF_ARRAY(theArray) (sizeof(theArray)/sizeof(theArray [0]))
 
@@ -198,24 +210,27 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
     CGContextSaveGState(context);
     // [self drawMonoscopioInContext:context inRect:layer.frame];
 #if 1
-    IGCDHGeo * aGeo = self.fInfo [@"geo"];
-    NSArray * aCircleArray = [self.fPresentingViewController geoCircles:aGeo];
+    NSArray * aCircleArray = self.fCircles;
     const CGFloat kZoomWidth = self->fBoundingBox.size.width/layer.frame.size.width;
     const CGFloat kZoomHeight = self->fBoundingBox.size.height/layer.frame.size.height;
     NSLog (@"%s - kZoomWidth: %@; kZoomHeight: %@", __PRETTY_FUNCTION__, @(kZoomWidth), @(kZoomHeight));
+    {
+    NSArray * aColorArray = @[[UIColor blackColor], [UIColor greenColor]];
     for (IGCDCircle * aCircle in aCircleArray){
         const CGPoint aOriginR = geoCircleOrigin (aCircle);
         const CGPoint aOrigin = CGPointMake (aOriginR.x - self->fBoundingBox.origin.x, aOriginR.y - self->fBoundingBox.origin.y);
         const CGFloat aRadius = aCircle.radius.floatValue;
         const CGPoint aOriginZoom = CGPointMake (aOrigin.x/kZoomWidth, aOrigin.y/kZoomHeight);
         const CGFloat aRadiusZoom = aRadius/kZoomWidth;
-        NSArray * aColorArray = @[[UIColor blackColor], [UIColor greenColor]];
+        
         const BOOL aSelected = [aCircle.circle_pt_status.circle_status_description isEqual:[[self.fPresentingViewController class]circleStatusToNSString:eCircleStatusSelected]];
         UIColor * aColor = aColorArray [aSelected];
         [self drawCircleInContext: context atOrigin:aOriginZoom withRadius:aRadiusZoom andColor: aColor];
     }
+    }
+    {
     NSArray * aConnectionArray = self.fConnections;
-
+    NSArray * aColorArray = @[[UIColor grayColor], [UIColor redColor]];
     for (IGCDConnection * aConnection in aConnectionArray){
         const CGPoint aOriginR1 = geoCircleOrigin (aConnection.connection_pt_circle1);
         const CGPoint aOrigin1 = CGPointMake (aOriginR1.x - self->fBoundingBox.origin.x, aOriginR1.y - self->fBoundingBox.origin.y);
@@ -225,12 +240,13 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
         const CGPoint aOrigin2 = CGPointMake (aOriginR2.x - self->fBoundingBox.origin.x, aOriginR2.y - self->fBoundingBox.origin.y);
         const CGPoint aOriginZoom2 = CGPointMake (aOrigin2.x/kZoomWidth, aOrigin2.y/kZoomHeight);
         const CGPoint aSegment []={aOriginZoom1, aOriginZoom2};
-        NSArray * aColorArray = @[[UIColor grayColor], [UIColor redColor]];
+        
         const BOOL aSelected = [aConnection.connection_pt_circle1.circle_pt_status.circle_status_description isEqual:[[self.fPresentingViewController class]circleStatusToNSString:eCircleStatusSelected]];
         IGDrawSegment(context, aSegment);
         UIColor * aColor = aColorArray [aSelected];
         CGContextSetStrokeColorWithColor(context, aColor.CGColor);
         CGContextStrokePath(context);
+    }
     }
 #endif
     CGContextRestoreGState(context);
@@ -365,8 +381,7 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
                                            [bSelf.fPresentingViewController geoSave];
                                         }
                                    }
-                                   [bSelf updateHeader];
-                                   [bSelf updateGraph];
+                                   [bSelf updateUI];
                                    sender.enabled = TRUE;
                                });
                            }];
