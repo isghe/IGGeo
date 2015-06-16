@@ -42,9 +42,14 @@
 - (void) IGHandleError: (NSError *) theError{
     NSParameterAssert(nil != theError);
     NSLog (@"%s - error: %@, %@", __PRETTY_FUNCTION__, theError, [theError userInfo]);
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"IGGeo error"
-                                                                   message:theError.localizedDescription
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    NSMutableArray * aMessages = [[NSMutableArray alloc] init];
+    [aMessages addObject:theError.localizedDescription];
+    if (nil != theError.userInfo && nil != theError.userInfo[@"reason"]){
+        [aMessages addObject: theError.userInfo[@"reason"]];
+    }
+    NSString * aMessage = [aMessages componentsJoinedByString:@";\n"];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"IGGeo error" message:aMessage preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {}];
@@ -81,27 +86,37 @@
     NSParameterAssert(nil == self.managedObjectContext);
     NSParameterAssert(nil == self.persistentStoreCoordinator);
     NSArray * aArray = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSLog (@"%s - aArray: %@", __PRETTY_FUNCTION__, aArray.description);
+
     NSURL *aURLUserDomain = aArray [0];
     // set up ManagedObjectModel
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"IGGeo" withExtension:@"momd"];
-    self->_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    NSLog (@"%s - entities: %@", __PRETTY_FUNCTION__, self.managedObjectModel.entities.description);
-    NSArray * aEntityNames = self.entityNames;
-    NSLog (@"%s - aEntityNames: %@", __PRETTY_FUNCTION__, aEntityNames);
-   
+    NSManagedObjectModel * aManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+
     // set up PersistentStore
     NSURL *storeURL = [aURLUserDomain URLByAppendingPathComponent:@"Card.sqlite"];
     NSError *error = nil;
-    self->_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
-    if (![self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    NSPersistentStoreCoordinator * aPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:aManagedObjectModel];
+
+    NSParameterAssert(nil == self.managedObjectModel);
+    NSParameterAssert(nil == self.managedObjectContext);
+    NSParameterAssert(nil == self.persistentStoreCoordinator);
+    if (![aPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         [self IGHandleError:error];
-        abort();
     }
-    // set up managedObjectContext
-    self->_managedObjectContext = [[NSManagedObjectContext alloc]init];
-    [self.managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+    else{
+        // set up managedObjectContext
+        NSManagedObjectContext * aManagedObjectContext = [[NSManagedObjectContext alloc]init];
+        [aManagedObjectContext setPersistentStoreCoordinator:aPersistentStoreCoordinator];
+        NSParameterAssert(nil == self.managedObjectModel);
+        NSParameterAssert(nil == self.managedObjectContext);
+        NSParameterAssert(nil == self.persistentStoreCoordinator);
+
+        self->_managedObjectModel = aManagedObjectModel;
+        self->_managedObjectContext = aManagedObjectContext;
+        self->_persistentStoreCoordinator = aPersistentStoreCoordinator;
+    }
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -205,10 +220,7 @@
                                           inManagedObjectContext:self.managedObjectContext];
         aStatus.geo_status_description = aString;
     }
-    NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
-    }
+    [self geoSave];
 }
 
 - (IBAction) populateCircleStatus{
@@ -246,10 +258,7 @@
                                    inManagedObjectContext:context];
         aGeo.dateTimeInsert = [[NSDate alloc] init];
         aGeo.geo_pt_status = aStatus;
-
-        if (![context save:&error]) {
-            [self IGHandleError:error];
-       }
+        [self geoSave];
     }
     else{
         [self IGHandleError:error];
@@ -266,23 +275,18 @@
         NSError *error = nil;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if(nil != fetchedObjects){
-            for (NSManagedObject *aManagedObject in fetchedObjects) {
-                [aManagedObjectsToDelete addObject:aManagedObject];
-            }
+            [aManagedObjectsToDelete addObjectsFromArray:fetchedObjects];
         }
         else{
             [self IGHandleError:error];
         }
     }
-    NSLog (@"%s - %@", __PRETTY_FUNCTION__, aManagedObjectsToDelete);
+    // NSLog (@"%s - %@", __PRETTY_FUNCTION__, aManagedObjectsToDelete);
     for (NSManagedObject *aManagedObject in aManagedObjectsToDelete){
         [self.managedObjectContext deleteObject:aManagedObject];
     }
 
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
-    }
+    [self geoSave];
     [self.fTableViewHGeo reloadData];
     [self enableControls];
 }
@@ -307,11 +311,7 @@
     NSParameterAssert([aInfo [@"geo"] isKindOfClass:[IGCDHGeo class]]);
     IGCDHGeo * aGeo = aInfo [@"geo"];
     [self geoDeleteGeo:aGeo];
-
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        [self IGHandleError:error];
-    }
+    [self geoSave];
     [self.fTableViewHGeo reloadData];
     [self enableControls];
 }
@@ -401,7 +401,24 @@
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"IGCDConnection" inManagedObjectContext:self.managedObjectContext];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"connection_pt_circle1 == %@", theCircle];
-    
+
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (nil == fetchedObjects){
+        [self IGHandleError:error];
+    }
+    return fetchedObjects;
+}
+
+- (NSArray *) geoConnectionsTo: (IGCDCircle *) theCircle{
+    NSParameterAssert(nil != theCircle);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"IGCDConnection" inManagedObjectContext:self.managedObjectContext];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"connection_pt_circle2 == %@", theCircle];
+
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:predicate];
     NSError *error = nil;
@@ -433,6 +450,11 @@
     NSParameterAssert(nil != theCircle);
     NSArray * aConnections = [self geoConnections:theCircle];
     for (IGCDConnection * aConnection in aConnections){
+        [self.managedObjectContext deleteObject:aConnection];
+    }
+
+    NSArray * aConnectionsTo = [self geoConnectionsTo:theCircle];
+    for (IGCDConnection * aConnection in aConnectionsTo){
         [self.managedObjectContext deleteObject:aConnection];
     }
     [self.managedObjectContext deleteObject:theCircle.circle_pt_point];

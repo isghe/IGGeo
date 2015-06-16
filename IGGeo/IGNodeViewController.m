@@ -21,7 +21,9 @@
 
 @property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *PanGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UITableView *fNodeTableViewController;
-
+#if DEBUG
+@property (strong, nonatomic) NSMutableDictionary * fIndexPathDictionary;
+#endif
 @end
 
 @implementation IGNodeViewController
@@ -31,6 +33,9 @@
     // Do any additional setup after loading the view from its nib.
     NSParameterAssert(nil != self.fRootViewController);
     NSParameterAssert(nil != self.fInfo);
+#if DEBUG
+    self.fIndexPathDictionary = [[NSMutableDictionary alloc] init];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,9 +80,20 @@
     NSDictionary * aInfo = aButton.superview.extraProperties [@"ig_geo"];
     NSParameterAssert([aInfo [@"circle"] isKindOfClass:[IGCDCircle class]]);
     IGCDCircle * aCircle = aInfo [@"circle"];
+#if DEBUG
+    {
+        NSIndexPath * aIndexPath = aInfo [@"index_path"];
+        IGCDCircle * aCircle3 = [self.fRootViewController geoCircles:self.fInfo [@"geo"]][aIndexPath.row];
+        IGCDCircle * aCircle2 = self.fIndexPathDictionary [aIndexPath];
+        NSParameterAssert(aCircle == aCircle2 && aCircle == aCircle3);
+        NSParameterAssert([aCircle isEqual:aCircle2] && [aCircle isEqual:aCircle3]);
+        [self.fIndexPathDictionary removeObjectForKey:aIndexPath];
+    }
+#endif
     [self.fRootViewController geoDeleteCircle:aCircle];
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
+    [self.fGeoViewController updateUI];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -139,13 +155,23 @@
         [self.fRootViewController geoSave];
         [self.fGeoViewController updateUI];
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(IGNodeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     const NSUInteger aNumberoOfRows = self->fNumberOfRows; // [self.fRootViewController geoCircles:self.fInfo [@"geo"]].count;
 
     IGCDCircle * aCircle = [self.fRootViewController geoCircles:self.fInfo [@"geo"]][indexPath.row];
+#if DEBUG
+    self.fIndexPathDictionary [indexPath] = aCircle;
+    if (nil == self.fIndexPathDictionary [indexPath]){
+        self.fIndexPathDictionary [indexPath] = aCircle;
+    }
+    else{
+        IGCDCircle * aCircle2 = self.fIndexPathDictionary [indexPath];
+        NSParameterAssert(aCircle == aCircle2);
+        NSParameterAssert([aCircle isEqual:aCircle2]);
+    }
+#endif
     const NSUInteger aNumberOfConnections = [self.fRootViewController geoConnections: aCircle].count;
     // cell.fHeader.text = [NSString stringWithFormat: @"%@/%@ - x:%@; y:%@; radius:%@; connections: %@",  @(indexPath.row +1), @(aNumberoOfRows), aCircle.circle_pt_point.x, aCircle.circle_pt_point.y, aCircle.radius, @(aNumberOfConnections)];
     NSParameterAssert(nil != cell.fHeader);
