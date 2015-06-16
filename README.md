@@ -1,4 +1,4 @@
-Mon Jun 15 19:59:44 EEST 2015
+Tue Jun 16 16:43:30 EEST 2015
 
 # IGGeo
 IGGeo - iPad - Objective-C native app to handle graphs
@@ -9,6 +9,7 @@ Features:
 * Drawing graphics;
 * Listing Circles in UITableView;
 * Add, edit and delete circles to current geo;
+* Circles are selectable in List.
 
 Technical:
 * Model is persistent using NSCoreData;
