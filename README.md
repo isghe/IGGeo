@@ -20,4 +20,8 @@ Todo:
 
 Isidoro Ghezzi
 
+* iggeo_screen_shot_02.png (88 Circles, 299 Connections)
 ![Graph02](images/iggeo_screen_shot_02.png)
+
+* iggeo_screen_shot_13.png (4220 Circles, 14475 Connections)
+![Graph13](images/iggeo_screen_shot_13.png)
