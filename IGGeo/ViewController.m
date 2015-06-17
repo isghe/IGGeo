@@ -45,8 +45,13 @@
 
     NSMutableArray * aMessages = [[NSMutableArray alloc] init];
     [aMessages addObject:theError.localizedDescription];
-    if (nil != theError.userInfo && nil != theError.userInfo[@"reason"]){
-        [aMessages addObject: theError.userInfo[@"reason"]];
+    if (nil != theError.userInfo){
+        if (nil != theError.userInfo[@"reason"]){
+            [aMessages addObject: theError.userInfo[@"reason"]];
+        }
+        if (nil != theError.userInfo[@"NSDebugDescription"]){
+            [aMessages addObject: theError.userInfo[@"NSDebugDescription"]];
+        }
     }
     NSString * aMessage = [aMessages componentsJoinedByString:@";\n"];
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"IGGeo error" message:aMessage preferredStyle:UIAlertControllerStyleAlert];
