@@ -19,3 +19,5 @@ Todo:
 * some things;
 
 Isidoro Ghezzi
+
+![Graph02](images/iggeo_screen_shot_02.png)
