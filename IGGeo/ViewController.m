@@ -426,6 +426,9 @@
 
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"radius" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+
     NSError *error = nil;
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if (nil == fetchedObjects){
