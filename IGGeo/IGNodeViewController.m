@@ -46,6 +46,9 @@
     self.view.hidden = YES;
 }
 
+-(void) updateUI{
+    [self.fNodeTableViewController reloadData];
+}
 /*
 #pragma mark - Navigation
 

@@ -14,4 +14,6 @@
 @property (strong, nonatomic) ViewController *fRootViewController;
 @property (strong, nonatomic) NSDictionary *fInfo;
 @property (strong, nonatomic) IGGeoViewController *fGeoViewController;
+-(void) updateUI;
+
 @end

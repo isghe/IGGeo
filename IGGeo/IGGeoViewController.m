@@ -382,6 +382,7 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
                                         }
                                    }
                                    [bSelf updateUI];
+                                   [bSelf.fNodeViewController updateUI];
                                    sender.enabled = TRUE;
                                });
                            }];
