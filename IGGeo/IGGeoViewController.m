@@ -198,9 +198,9 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
     return CGPointMake(theCircle.circle_pt_point.x.floatValue, theCircle.circle_pt_point.y.floatValue);
 }
 
-- (void) drawCircleInContext: (CGContextRef) theContext atOrigin: (CGPoint) theOrigin withRadius: (CGFloat) theRadius andColor: (UIColor *) theColor{
+- (void) drawEllipseInContext: (CGContextRef) theContext atOrigin: (CGPoint) theOrigin withRadius: (CGSize) theRadius andColor: (UIColor *) theColor{
     CGContextSetFillColorWithColor(theContext, theColor.CGColor);
-    CGContextFillEllipseInRect(theContext, CGRectMake(theOrigin.x-theRadius, theOrigin.y-theRadius, 2*theRadius, 2*theRadius));
+    CGContextFillEllipseInRect(theContext, CGRectMake(theOrigin.x-theRadius.width, theOrigin.y-theRadius.height, 2*theRadius.width, 2*theRadius.height));
     // CGContextStrokeEllipseInRect(theContext, CGRectMake(theOrigin.x-theRadius, theOrigin.y-theRadius, 2*theRadius, 2*theRadius));
 }
 
@@ -221,11 +221,11 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
         const CGPoint aOrigin = CGPointMake (aOriginR.x - self->fBoundingBox.origin.x, aOriginR.y - self->fBoundingBox.origin.y);
         const CGFloat aRadius = aCircle.radius.floatValue;
         const CGPoint aOriginZoom = CGPointMake (aOrigin.x/kZoomWidth, aOrigin.y/kZoomHeight);
-        const CGFloat aRadiusZoom = aRadius/kZoomWidth;
+        const CGSize aRadiusZoom = CGSizeMake (aRadius/kZoomWidth, aRadius/kZoomHeight);
         
         const BOOL aSelected = [aCircle.circle_pt_status.circle_status_description isEqual:[[self.fPresentingViewController class]circleStatusToNSString:eCircleStatusSelected]];
         UIColor * aColor = aColorArray [aSelected];
-        [self drawCircleInContext: context atOrigin:aOriginZoom withRadius:aRadiusZoom andColor: aColor];
+        [self drawEllipseInContext: context atOrigin:aOriginZoom withRadius:aRadiusZoom andColor: aColor];
     }
     }
     {
