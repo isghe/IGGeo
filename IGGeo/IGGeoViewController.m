@@ -75,14 +75,17 @@ static BOOL IGIsValidBoundingBox (const CGRect theRect){
             self.fLayer = nil;
         }
         const CGFloat aRatio = aBoundingBox.size.width/aBoundingBox.size.height;
-        IGGeoGraphicView * aView = [[IGGeoGraphicView alloc] initWithFrame:CGRectMake(20, 100, 700, 700/aRatio)];
-        self.fGraph = aView;
-        // IGGeoGraphicView * aView = [[IGGeoGraphicView alloc] initWithFrame:CGRectMake(0, 0, aBoundingBox.size.width, aBoundingBox.size.height)];
         const CGFloat aFactorWidth = 1; ///(aView.frame.size.width/aBoundingBox.size.width);
         const CGFloat aFactorHeight = 1; ///(aView.frame.size.height/aBoundingBox.size.height);
+
+        const CGSize aViewFrameSize = CGSizeMake (self.fScrollerView.frame.size.width/aFactorWidth, self.fScrollerView.frame.size.width/(aRatio*aFactorHeight));
+        const CGFloat aYOffset = (self.fScrollerView.frame.size.height - aViewFrameSize.height)/2.0;
+        IGGeoGraphicView * aView = [[IGGeoGraphicView alloc] initWithFrame:CGRectMake(0, aYOffset, aViewFrameSize.width, aViewFrameSize.height)];
+        self.fGraph = aView;
+        // IGGeoGraphicView * aView = [[IGGeoGraphicView alloc] initWithFrame:CGRectMake(0, 0, aBoundingBox.size.width, aBoundingBox.size.height)];
         // CGAffineTransform aScaleTransform = CGAffineTransformMakeScale(aFactorWidth, aFactorHeight);
 
-        aView.backgroundColor = [UIColor whiteColor];
+        aView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:0.75 alpha:1];
         aView.fRootViewController = self.fPresentingViewController;
         // aView.layer.transform = CATransform3DMakeAffineTransform (aScaleTransform);
 
