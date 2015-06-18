@@ -2,7 +2,7 @@
 //  IGCDCircle.m
 //  IGGeo
 //
-//  Created by Isidoro Ghezzi on 16/06/15.
+//  Created by Isidoro Ghezzi on 18/06/15.
 //  Copyright (c) 2015 Isidoro Ghezzi. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 @implementation IGCDCircle
 
 @dynamic radius;
+@dynamic index;
 @dynamic circle_pt_geo;
 @dynamic circle_pt_point;
 @dynamic circle_pt_status;

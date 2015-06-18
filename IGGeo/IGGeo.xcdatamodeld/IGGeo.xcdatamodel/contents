@@ -7,6 +7,7 @@
         <attribute name="geo_status_description" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="IGCDCircle" representedClassName="IGCDCircle" syncable="YES">
+        <attribute name="index" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="radius" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="circle_pt_geo" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="IGCDHGeo" syncable="YES"/>
         <relationship name="circle_pt_point" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDPoint" syncable="YES"/>
@@ -25,11 +26,11 @@
         <attribute name="y" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
+        <element name="IGCDACircleStatus" positionX="-72" positionY="302" width="128" height="58"/>
         <element name="IGCDAGeoStatus" positionX="144" positionY="0" width="128" height="58"/>
-        <element name="IGCDCircle" positionX="-47" positionY="116" width="128" height="103"/>
+        <element name="IGCDCircle" positionX="-47" positionY="116" width="128" height="120"/>
         <element name="IGCDConnection" positionX="-270" positionY="203" width="128" height="73"/>
         <element name="IGCDHGeo" positionX="-36" positionY="-9" width="128" height="73"/>
         <element name="IGCDPoint" positionX="135" positionY="170" width="128" height="73"/>
-        <element name="IGCDACircleStatus" positionX="-72" positionY="302" width="128" height="58"/>
     </elements>
 </model>
