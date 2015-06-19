@@ -207,7 +207,7 @@
     const NSUInteger aNumberOfConnections = [self.fRootViewController geoConnections: aCircle].count;
     // cell.fHeader.text = [NSString stringWithFormat: @"%@/%@ - x:%@; y:%@; radius:%@; connections: %@",  @(indexPath.row +1), @(aNumberoOfRows), aCircle.circle_pt_point.x, aCircle.circle_pt_point.y, aCircle.radius, @(aNumberOfConnections)];
     NSParameterAssert(nil != cell.fHeader);
-    cell.fHeader.text = [NSString stringWithFormat: @"%@/%@ - connections: %@",  @(indexPath.row +1), @(aNumberoOfRows), @(aNumberOfConnections)];
+    cell.fHeader.text = [NSString stringWithFormat: @"%@/%@ - index: %@; connections: %@", @(indexPath.row +1), @(aNumberoOfRows), aCircle.index, @(aNumberOfConnections)];
     [cell.fHeader setNeedsDisplay];
     cell.contentView.extraProperties [@"ig_geo"] = @{@"circle": aCircle, @"index_path": indexPath};
 

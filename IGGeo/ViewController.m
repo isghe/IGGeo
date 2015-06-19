@@ -411,6 +411,7 @@
                          insertNewObjectForEntityForName:@"IGCDCircle"
                          inManagedObjectContext:self.managedObjectContext];
     aCircle.radius = @(theRadious);
+    aCircle.index = theIndex;
     aCircle.circle_pt_point = aPoint;
     aCircle.circle_pt_geo = theGeo;
     aCircle.circle_pt_status = aStatus;
