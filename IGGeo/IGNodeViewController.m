@@ -75,6 +75,7 @@
     [self.fRootViewController geoInsertCircle:self.fInfo [@"geo"] withOrigin:CGPointZero radious:0 andStatus:eCircleStatusNotSelected];
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
+    [self.fGeoViewController updateUI_async];
 }
 #pragma mark - UITableViewDelegate
 
