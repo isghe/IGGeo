@@ -22,7 +22,7 @@ typedef enum{
 - (void) IGHandleError: (NSError *) theError;
 
 #pragma mark - geo
-- (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin radious: (CGFloat) theRadious andStatus: (ECircleStatus) theStatus;
+- (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin radious: (CGFloat) theRadious index: (NSNumber *) theIndex andStatus: (ECircleStatus) theStatus;
 - (NSArray *) geoCircles: (IGCDHGeo *) theGeo;
 - (void) geoDeleteCircle: (IGCDCircle *) theCircle;
 - (void) geoSave;

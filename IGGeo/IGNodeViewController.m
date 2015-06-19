@@ -72,7 +72,9 @@
 }
 
 - (IBAction)actionAdd:(id)sender {
-    [self.fRootViewController geoInsertCircle:self.fInfo [@"geo"] withOrigin:CGPointZero radious:0 andStatus:eCircleStatusNotSelected];
+    // https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Articles/cdFetching.html
+    NSUInteger aCount = [self.fRootViewController geoCircles:self.fInfo [@"geo"]].count;
+    [self.fRootViewController geoInsertCircle:self.fInfo [@"geo"] withOrigin:CGPointZero radious:0 index: @(aCount+1)andStatus:eCircleStatusNotSelected];
     [self.fRootViewController geoSave];
     [self.fNodeTableViewController reloadData];
 }

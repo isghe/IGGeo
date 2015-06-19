@@ -398,7 +398,7 @@
     return fetchedObjects;
 }
 
-- (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin radious: (CGFloat) theRadious andStatus: (ECircleStatus) theStatus{
+- (IGCDCircle *) geoInsertCircle: (IGCDHGeo *) theGeo withOrigin: (CGPoint) theOrigin radious: (CGFloat) theRadious index: (NSNumber *) theIndex andStatus: (ECircleStatus) theStatus{
     NSParameterAssert(nil != theGeo);
     NSParameterAssert(nil != theGeo);
     IGCDACircleStatus * aStatus = [self geoCircleStatus:theStatus];
@@ -589,13 +589,15 @@
         NSLog (@"%s - inserting Circles", __PRETTY_FUNCTION__);
 
         NSMutableArray * aCDCircleArray = [[NSMutableArray alloc] initWithCapacity:theArray.count];
+        NSUInteger aIndex = 1;
         for (NSDictionary * aCircle in theArray){
             NSNumber * aX = aCircle [@"x"];
             NSNumber * aY = aCircle [@"y"];
             NSNumber * aRadious = aCircle [@"r"];
             const CGPoint aOrigin = CGPointMake(aX.floatValue, aY.floatValue);
-            IGCDCircle * aCDCircle = [self geoInsertCircle:theGeo withOrigin:aOrigin radious:aRadious.floatValue andStatus: eCircleStatusNotSelected];
+            IGCDCircle * aCDCircle = [self geoInsertCircle:theGeo withOrigin:aOrigin radious:aRadious.floatValue index: @(aIndex) andStatus: eCircleStatusNotSelected];
             [aCDCircleArray addObject:@{@"circle": aCDCircle, @"connections": aCircle [@"l"]}];
+            ++aIndex;
         }
 
         NSLog (@"%s - inserting Connections", __PRETTY_FUNCTION__);
