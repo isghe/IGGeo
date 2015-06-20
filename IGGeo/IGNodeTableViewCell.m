@@ -8,6 +8,12 @@
 
 #import "IGNodeTableViewCell.h"
 #import "IGLabelTextFieldViewController.h"
+#import "IGSwitchWithLabelController.h"
+
+@interface IGNodeTableViewCell()
+@property (weak, nonatomic) IBOutlet UIView *fSwitchWithLabelSuper;
+@end
+
 @implementation IGNodeTableViewCell
 
 - (void)awakeFromNib {
@@ -21,6 +27,9 @@
         aController.fLabel.text = aKey;
         self->_fLabelInputControllers [aKey] = aController;
     }
+    IGSwitchWithLabelController * aSwitchWithLabel = [[IGSwitchWithLabelController alloc] initWithLabel:@"Selected"];
+    self->_fSwitchWithLabelController = aSwitchWithLabel;
+    [self.fSwitchWithLabelSuper addSubview:aSwitchWithLabel.view];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

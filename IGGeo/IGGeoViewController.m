@@ -151,8 +151,8 @@ static CGRect CalculateBoundingBox (NSArray * theCircles){
     self.fLayer = nil;
 }
  */
--(void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     if (self.fLayer) {
         self.fLayer.delegate = nil;
     }

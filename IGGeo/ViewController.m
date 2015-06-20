@@ -131,6 +131,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     // Called when the view is about to made visible. Default does nothing
+    [super viewWillAppear: animated];
     [self.fTableViewHGeo reloadData];
 }
 - (void)didReceiveMemoryWarning {

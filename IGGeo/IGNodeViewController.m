@@ -103,7 +103,7 @@
 }
 
 - (void) actionSelectCircle: (UISwitch *) theSwitch{
-    NSDictionary * aInfo = theSwitch.superview.extraProperties [@"ig_geo"];
+    NSDictionary * aInfo = theSwitch.superview.superview.superview.extraProperties [@"ig_geo"];
     NSParameterAssert([aInfo [@"circle"] isKindOfClass:[IGCDCircle class]]);
     IGCDCircle * aCircle = aInfo [@"circle"];
 #if DEBUG
@@ -220,9 +220,9 @@
         aController.fTextField.extraProperties [@"ig_geo"] = @{@"circle": aCircle, @"number": aNumber, @"key": aKey};
     }
     [cell.fButtonDelete addTarget:self action:@selector(actionDeleteCircle:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.fSwitchSelector addTarget:self action:@selector(actionSelectCircle:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.fSwitchWithLabelController.fSwitch addTarget:self action:@selector(actionSelectCircle:) forControlEvents:UIControlEventTouchUpInside];
     const BOOL aSelected = [aCircle.circle_pt_status.circle_status_description isEqual:[self.fRootViewController geoCircleStatus:eCircleStatusSelected].circle_status_description];
-    [cell.fSwitchSelector setOn: aSelected];
+    [cell.fSwitchWithLabelController.fSwitch setOn: aSelected];
     // NSLog(@"%s - aString: %@, %p", __PRETTY_FUNCTION__, aString, cell.fHeader);
     // cell.textLabel.text = [NSString stringWithFormat:@"test %@", @(indexPath.row +1)];
 }

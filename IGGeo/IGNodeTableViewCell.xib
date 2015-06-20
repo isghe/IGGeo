@@ -27,15 +27,15 @@
                         <rect key="frame" x="8" y="37" width="472" height="30"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wsx-0e-DpF">
-                                <rect key="frame" x="0.0" y="0.0" width="158" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf8-4N-ehz">
-                                <rect key="frame" x="157" y="0.0" width="158" height="30"/>
+                                <rect key="frame" x="144" y="0.0" width="145" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FSk-GY-LYq">
-                                <rect key="frame" x="314" y="0.0" width="158" height="30"/>
+                                <rect key="frame" x="290" y="0.0" width="145" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -53,6 +53,10 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ISg-Op-E9d">
+                        <rect key="frame" x="488" y="28" width="184" height="47"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="e6H-om-QQQ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Bnl-Ah-9hE"/>
@@ -74,6 +78,7 @@
                 <outlet property="fSuperX" destination="wsx-0e-DpF" id="sTL-qZ-Xeb"/>
                 <outlet property="fSuperY" destination="Pf8-4N-ehz" id="0qF-nq-XF4"/>
                 <outlet property="fSwitchSelector" destination="OgF-pP-aeM" id="ugt-jg-AQq"/>
+                <outlet property="fSwitchWithLabelSuper" destination="ISg-Op-E9d" id="0dA-Nh-nAN"/>
             </connections>
             <point key="canvasLocation" x="338" y="424.5"/>
         </tableViewCell>
