@@ -523,22 +523,6 @@
     return ret;
 }
 
-- (void) geoDeleteCircleOld: (IGCDCircle *) theCircle{
-    NSParameterAssert(nil != theCircle);
-    NSArray * aConnections = [self geoConnections:theCircle];
-    for (IGCDConnection * aConnection in aConnections){
-        [self.managedObjectContext deleteObject:aConnection];
-    }
-
-    NSArray * aConnectionsTo = [self geoConnectionsTo:theCircle];
-    for (IGCDConnection * aConnection in aConnectionsTo){
-        [self.managedObjectContext deleteObject:aConnection];
-    }
-
-    [self.managedObjectContext deleteObject:theCircle.circle_pt_point];
-    [self.managedObjectContext deleteObject:theCircle];
-}
-
 - (IGCDConnectionGeo *) geoConnectionGeoWithConnection: (IGCDConnection *) theConnection{
     NSParameterAssert(nil != theConnection);
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
