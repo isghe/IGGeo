@@ -523,7 +523,7 @@
     return ret;
 }
 
-- (void) geoDeleteCircle: (IGCDCircle *) theCircle{
+- (void) geoDeleteCircleOld: (IGCDCircle *) theCircle{
     NSParameterAssert(nil != theCircle);
     NSArray * aConnections = [self geoConnections:theCircle];
     for (IGCDConnection * aConnection in aConnections){
@@ -534,10 +534,57 @@
     for (IGCDConnection * aConnection in aConnectionsTo){
         [self.managedObjectContext deleteObject:aConnection];
     }
+
     [self.managedObjectContext deleteObject:theCircle.circle_pt_point];
     [self.managedObjectContext deleteObject:theCircle];
 }
 
+- (IGCDConnectionGeo *) geoConnectionGeoWithConnection: (IGCDConnection *) theConnection{
+    NSParameterAssert(nil != theConnection);
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"IGCDConnectionGeo" inManagedObjectContext:self.managedObjectContext];
+    NSPredicate * aPredicate = [NSPredicate predicateWithFormat:@"connection_ref = %@", theConnection];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:aPredicate];
+
+    NSError *error = nil;
+    IGCDConnectionGeo * ret = nil;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (nil != fetchedObjects){
+        NSAssert (fetchedObjects.count == 1, @"fetchedObjects.count == 1");
+        ret = fetchedObjects [0];
+    }
+    else{
+        [self IGHandleError:error];
+    }
+    return ret;
+}
+
+- (void) geoDeleteCircle: (IGCDCircle *) theCircle{
+    NSParameterAssert(nil != theCircle);
+    NSArray * aConnections = [self geoConnections:theCircle];
+    NSArray * aConnectionsTo = [self geoConnectionsTo:theCircle];
+    NSMutableArray * aConnectionsMix = [[NSMutableArray alloc] initWithCapacity:aConnections.count + aConnectionsTo.count];
+    [aConnectionsMix addObjectsFromArray:aConnections];
+    [aConnectionsMix addObjectsFromArray:aConnectionsMix];
+    NSMutableArray * aConnectionGeoMix = [[NSMutableArray alloc] initWithCapacity:aConnectionsMix.count];
+    for (IGCDConnection * aConnection in aConnectionsMix){
+        IGCDConnectionGeo * aConnectionGeo = [self geoConnectionGeoWithConnection:aConnection];
+        [aConnectionGeoMix addObject:aConnectionGeo];
+    }
+
+    for (IGCDConnectionGeo * aConnectionGeo in aConnectionGeoMix){
+        [self.managedObjectContext deleteObject:aConnectionGeo];
+    }
+
+    for (IGCDConnection * aConnection in aConnectionsMix){
+        [self.managedObjectContext deleteObject:aConnection];
+    }
+
+    [self.managedObjectContext deleteObject:theCircle.circle_pt_point];
+    [self.managedObjectContext deleteObject:theCircle];
+}
 - (void) geoDeleteConnectionGeo: (IGCDConnectionGeo *) theConnectionGeo{
     NSParameterAssert(nil != theConnectionGeo);
     [self.managedObjectContext deleteObject:theConnectionGeo];
@@ -551,7 +598,7 @@
         [self geoDeleteCircle:aCircle];
     }
 }
-
+#if 0
 - (void) geoDeleteConnectionGeoInGeo: (IGCDHGeo *) theGeo{
     NSLog (@"%s", __PRETTY_FUNCTION__);
     NSParameterAssert(nil != theGeo);
@@ -560,11 +607,11 @@
         [self geoDeleteConnectionGeo:aConnectionGeo];
     }
 }
-
+#endif
 - (void) geoDeleteGeo: (IGCDHGeo *) theGeo{
     NSParameterAssert(nil != theGeo);
     [self geoDeleteCirclesInGeo:theGeo];
-    [self geoDeleteConnectionGeoInGeo: theGeo];
+    // [self geoDeleteConnectionGeoInGeo: theGeo];
     [self.managedObjectContext deleteObject:theGeo];
 }
 
@@ -646,7 +693,7 @@
     NSLog (@"%s - aIsValidArray: %@", __PRETTY_FUNCTION__, @(aIsValidArray));
     NSLog (@"%s - theArray.count: %@", __PRETTY_FUNCTION__, @(theArray.count));
     if (TRUE == aIsValidArray){
-        [self geoDeleteConnectionGeoInGeo:theGeo];
+        // [self geoDeleteConnectionGeoInGeo:theGeo];
         [self geoDeleteCirclesInGeo:theGeo];
         NSLog (@"%s - inserting Circles", __PRETTY_FUNCTION__);
 
