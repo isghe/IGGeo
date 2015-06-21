@@ -23,6 +23,7 @@
 		755F80DC1B29C06C00C35F99 /* IGGeoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80DB1B29C06C00C35F99 /* IGGeoTests.m */; };
 		7568EA221B300CCA006FC769 /* IGCDCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7568EA211B300CCA006FC769 /* IGCDCircle.m */; };
 		7568EA251B300DF9006FC769 /* IGCDACircleStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 7568EA241B300DF9006FC769 /* IGCDACircleStatus.m */; };
+		75937B4C1B371A9000B95B49 /* IGCDConnectionGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 75937B4B1B371A9000B95B49 /* IGCDConnectionGeo.m */; };
 		75B212CD1B2D7901005F49D5 /* IGNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */; };
 		75B212CE1B2D7901005F49D5 /* IGNodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */; };
 		75BF5AD11B2EED870047C3AD /* UIAlertController+Showable.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF5AD01B2EED870047C3AD /* UIAlertController+Showable.m */; };
@@ -78,6 +79,8 @@
 		7568EA211B300CCA006FC769 /* IGCDCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDCircle.m; path = IGCD/IGCDCircle.m; sourceTree = "<group>"; };
 		7568EA231B300DF9006FC769 /* IGCDACircleStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDACircleStatus.h; path = IGCD/IGCDACircleStatus.h; sourceTree = "<group>"; };
 		7568EA241B300DF9006FC769 /* IGCDACircleStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDACircleStatus.m; path = IGCD/IGCDACircleStatus.m; sourceTree = "<group>"; };
+		75937B4A1B371A9000B95B49 /* IGCDConnectionGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDConnectionGeo.h; path = IGCD/IGCDConnectionGeo.h; sourceTree = "<group>"; };
+		75937B4B1B371A9000B95B49 /* IGCDConnectionGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDConnectionGeo.m; path = IGCD/IGCDConnectionGeo.m; sourceTree = "<group>"; };
 		75B212CA1B2D7901005F49D5 /* IGNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGNodeViewController.h; sourceTree = "<group>"; };
 		75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGNodeViewController.m; sourceTree = "<group>"; };
 		75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGNodeViewController.xib; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 		75E309641B2B936D0098296C /* IGCD */ = {
 			isa = PBXGroup;
 			children = (
+				75937B4A1B371A9000B95B49 /* IGCDConnectionGeo.h */,
+				75937B4B1B371A9000B95B49 /* IGCDConnectionGeo.m */,
 				7568EA231B300DF9006FC769 /* IGCDACircleStatus.h */,
 				7568EA241B300DF9006FC769 /* IGCDACircleStatus.m */,
 				75E309611B2B935F0098296C /* IGCDConnection.h */,
@@ -341,6 +346,7 @@
 			files = (
 				751785DE1B2E35C400C82C18 /* IGGeoGraphicView.m in Sources */,
 				75DDAF751B2D9F1400952F25 /* IGNodeTableViewCell.m in Sources */,
+				75937B4C1B371A9000B95B49 /* IGCDConnectionGeo.m in Sources */,
 				755F80C21B29C06B00C35F99 /* AppDelegate.m in Sources */,
 				75E309631B2B935F0098296C /* IGCDConnection.m in Sources */,
 				75489BC21B35E52600EF3EB9 /* IGSwitchWithLabelController.m in Sources */,

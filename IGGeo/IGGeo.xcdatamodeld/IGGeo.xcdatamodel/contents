@@ -17,6 +17,10 @@
         <relationship name="connection_pt_circle1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDCircle" syncable="YES"/>
         <relationship name="connection_pt_circle2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDCircle" syncable="YES"/>
     </entity>
+    <entity name="IGCDConnectionGeo" representedClassName="IGCDConnectionGeo" syncable="YES">
+        <relationship name="connection_ref" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDConnection" syncable="YES"/>
+        <relationship name="geo_ref" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDHGeo" syncable="YES"/>
+    </entity>
     <entity name="IGCDHGeo" representedClassName="IGCDHGeo" syncable="YES">
         <attribute name="dateTimeInsert" attributeType="Date" syncable="YES"/>
         <relationship name="geo_pt_status" maxCount="1" deletionRule="Nullify" destinationEntity="IGCDAGeoStatus" syncable="YES"/>
@@ -32,5 +36,6 @@
         <element name="IGCDConnection" positionX="-270" positionY="203" width="128" height="73"/>
         <element name="IGCDHGeo" positionX="-36" positionY="-9" width="128" height="73"/>
         <element name="IGCDPoint" positionX="135" positionY="170" width="128" height="73"/>
+        <element name="IGCDConnectionGeo" positionX="-99" positionY="108" width="128" height="75"/>
     </elements>
 </model>
