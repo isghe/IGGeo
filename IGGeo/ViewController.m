@@ -350,8 +350,8 @@
     // Set up the cell...
     IGCDHGeo *aGeo = aHGeo [indexPath.row];
     NSNumber * aCircleCount = @([self geoCircles:aGeo].count);
-    // NSNumber * aConnectionCounter = @([self geoConnectionsCountInGeo:aGeo]);
-    cell.textLabel.text = [NSString stringWithFormat: @"%@/%@ - %@; Circles: %@", @(indexPath.row + 1), @(aHGeo.count), aGeo.dateTimeInsert.description, aCircleCount];
+    NSNumber * aConnectionCounter = @([self geoConnectionsCountInGeo:aGeo]);
+    cell.textLabel.text = [NSString stringWithFormat: @"%@/%@ - %@; Circles: %@; Connections: %@", @(indexPath.row + 1), @(aHGeo.count), aGeo.dateTimeInsert.description, aCircleCount, aConnectionCounter];
     cell.fLabelStatus.text = [NSString stringWithFormat:@"%@",
                                  aGeo.geo_pt_status.geo_status_description];
     cell.contentView.extraProperties [@"ig_geo"] = @{@"geo": aGeo, @"index_path": indexPath};
@@ -514,7 +514,7 @@
     return [self geoConnectionsInGeoFast:theGeo];
 }
 
-- (NSUInteger) geoConnectionsCountInGeo: (IGCDHGeo *) theGeo{
+- (NSUInteger) geoConnectionsCountInGeoSlow: (IGCDHGeo *) theGeo{
     NSParameterAssert(nil != theGeo);
     NSUInteger ret = 0;
     for (IGCDCircle * aCircle in [self geoCircles:theGeo]){
@@ -523,6 +523,13 @@
     return ret;
 }
 
+- (NSUInteger) geoConnectionsCountInGeoFast: (IGCDHGeo *) theGeo{
+    return [self geoConnectionsGeoInGeo:theGeo].count;
+}
+
+- (NSUInteger) geoConnectionsCountInGeo: (IGCDHGeo *) theGeo{
+    return [self geoConnectionsCountInGeoFast:theGeo];
+}
 - (IGCDConnectionGeo *) geoConnectionGeoWithConnection: (IGCDConnection *) theConnection{
     NSParameterAssert(nil != theConnection);
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
