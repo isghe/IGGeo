@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+	[super awakeFromNib];
     self->_fLabelInputControllers = [NSMutableDictionary dictionaryWithCapacity:3];
     NSDictionary * aDictionary = @{@"x": self.fSuperX, @"y": self.fSuperY, @"r": self.fSuperR};
     for (NSString * aKey in aDictionary.allKeys){

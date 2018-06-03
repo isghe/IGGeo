@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IGCDHGeo.h"
 #import "ViewController.h"
-@interface IGGeoViewController : UIViewController <UIScrollViewDelegate>
+@interface IGGeoViewController : UIViewController <UIScrollViewDelegate, CALayerDelegate>
 @property (strong, nonatomic) NSDictionary *fInfo;
 @property (strong, nonatomic) ViewController *fPresentingViewController;
 - (void) updateUI_async;
