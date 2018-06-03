@@ -28,7 +28,7 @@ typedef enum{
 - (void) geoSave;
 - (void) geoHandleFetch: (NSArray *) theArray inGeo: (IGCDHGeo *) theGeo;
 - (NSArray *) geoConnections: (IGCDCircle *) theCircle;
-- (NSUInteger) geoConnectionsCountInGeo: (IGCDHGeo *) theGeo;
+// - (NSUInteger) geoConnectionsCountInGeo: (IGCDHGeo *) theGeo;
 - (NSArray *) geoConnectionsInGeo: (IGCDHGeo *) theGeo;
 - (IGCDACircleStatus *) geoCircleStatus: (ECircleStatus) theCircleStatus;
 + (NSString *) circleStatusToNSString:(ECircleStatus) theCircleStatus;

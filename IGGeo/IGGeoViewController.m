@@ -42,7 +42,16 @@
         });
     });
 }
-- (void) updateHeader{
+
++ (id) executeBlock: (id (^)(void)) block withTag: (NSString *) theTag{
+    const CFAbsoluteTime aBegin = CFAbsoluteTimeGetCurrent ();
+    id ret = block ();
+    const CFAbsoluteTime aDeltaInside = CFAbsoluteTimeGetCurrent () - aBegin;
+    NSLog (@"%s - %@ - aDelta: %@", __PRETTY_FUNCTION__, theTag, @(aDeltaInside * 1000).stringValue);
+    return ret;
+}
+
+- (void) updateHeaderPrivate{
     IGCDHGeo * aGeo = self.fInfo [@"geo"];
     NSIndexPath * aIndexPath = self.fInfo [@"index_path"];
     self->_fCircles = [self.fPresentingViewController geoCircles:aGeo];
@@ -50,6 +59,15 @@
     self->_fConnections = [self.fPresentingViewController geoConnectionsInGeo:aGeo];
     const NSUInteger aConnectionsCount = self.fConnections.count;
     self.fHeader.text = [NSString stringWithFormat: @"%@ - %@; Circles: %@, Connections: %@", @(aIndexPath.row +1), aGeo.dateTimeInsert.description, @(aCirclesCount), @(aConnectionsCount)];
+}
+
+- (void)updateHeader {
+    typeof(self) __block bSelf = self;
+    [[self class] executeBlock:^{
+        id ret = nil;
+        [bSelf updateHeaderPrivate];
+        return ret;
+    } withTag:@"updateHeader"];
 }
 
 static BOOL IGIsValidBoundingBox (const CGRect theRect){
@@ -151,8 +169,8 @@ static CGRect CalculateBoundingBox (NSArray * theCircles){
     self.fLayer = nil;
 }
  */
--(void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     if (self.fLayer) {
         self.fLayer.delegate = nil;
     }
@@ -256,10 +274,12 @@ static CGPoint geoCircleOrigin (IGCDCircle * theCircle){
 }
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
-    const CFAbsoluteTime aBegin = CFAbsoluteTimeGetCurrent ();
-    [self drawLayerPrivate:layer inContext:context];
-    const CFAbsoluteTime aDeltaInside = CFAbsoluteTimeGetCurrent () - aBegin;
-    NSLog (@"%s - aDeltaInside: %@", __PRETTY_FUNCTION__, @(aDeltaInside * 1000).stringValue);
+    typeof(self) __block bSelf = self;
+    [[self class] executeBlock:^{
+        id ret = nil;
+        [bSelf drawLayerPrivate:layer inContext:context];
+        return ret;
+    } withTag:@"drawLayer:inContext:"];
 }
 
 - (void)didReceiveMemoryWarning {

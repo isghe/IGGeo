@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IGSwitchWithLabelController.h"
 
 @interface IGNodeTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *fHeader;
@@ -16,4 +17,5 @@
 @property (weak, nonatomic) IBOutlet UIView *fSuperR;
 @property (readonly, strong, nonatomic) NSMutableDictionary *fLabelInputControllers;
 @property (weak, nonatomic) IBOutlet UISwitch *fSwitchSelector;
+@property (readonly, strong, nonatomic) IGSwitchWithLabelController *fSwitchWithLabelController;
 @end

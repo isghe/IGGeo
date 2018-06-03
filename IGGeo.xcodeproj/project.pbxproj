@@ -11,6 +11,8 @@
 		7519B9C41B2D664B006BE59D /* IGGeoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7519B9C31B2D664B006BE59D /* IGGeoConfiguration.m */; };
 		75396C951B2C54E500A70B76 /* IGHGeoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75396C941B2C54E500A70B76 /* IGHGeoTableViewCell.m */; };
 		75396C991B2C6C1500A70B76 /* NSObject+ExtraProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 75396C971B2C6C1500A70B76 /* NSObject+ExtraProperties.m */; };
+		75489BC21B35E52600EF3EB9 /* IGSwitchWithLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75489BC01B35E52600EF3EB9 /* IGSwitchWithLabelController.m */; };
+		75489BC31B35E52600EF3EB9 /* IGSwitchWithLabelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75489BC11B35E52600EF3EB9 /* IGSwitchWithLabelController.xib */; };
 		755F80BF1B29C06B00C35F99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80BE1B29C06B00C35F99 /* main.m */; };
 		755F80C21B29C06B00C35F99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80C11B29C06B00C35F99 /* AppDelegate.m */; };
 		755F80C51B29C06B00C35F99 /* IGGeo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 755F80C31B29C06B00C35F99 /* IGGeo.xcdatamodeld */; };
@@ -21,6 +23,7 @@
 		755F80DC1B29C06C00C35F99 /* IGGeoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 755F80DB1B29C06C00C35F99 /* IGGeoTests.m */; };
 		7568EA221B300CCA006FC769 /* IGCDCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7568EA211B300CCA006FC769 /* IGCDCircle.m */; };
 		7568EA251B300DF9006FC769 /* IGCDACircleStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 7568EA241B300DF9006FC769 /* IGCDACircleStatus.m */; };
+		75937B4C1B371A9000B95B49 /* IGCDConnectionGeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 75937B4B1B371A9000B95B49 /* IGCDConnectionGeo.m */; };
 		75B212CD1B2D7901005F49D5 /* IGNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */; };
 		75B212CE1B2D7901005F49D5 /* IGNodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */; };
 		75BF5AD11B2EED870047C3AD /* UIAlertController+Showable.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BF5AD01B2EED870047C3AD /* UIAlertController+Showable.m */; };
@@ -55,6 +58,9 @@
 		75396C941B2C54E500A70B76 /* IGHGeoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGHGeoTableViewCell.m; sourceTree = "<group>"; };
 		75396C971B2C6C1500A70B76 /* NSObject+ExtraProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+ExtraProperties.m"; path = "IGCategories/NSObject+ExtraProperties.m"; sourceTree = "<group>"; };
 		75396C981B2C6C1500A70B76 /* NSObject+ExtraProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+ExtraProperties.h"; path = "IGCategories/NSObject+ExtraProperties.h"; sourceTree = "<group>"; };
+		75489BBF1B35E52600EF3EB9 /* IGSwitchWithLabelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGSwitchWithLabelController.h; sourceTree = "<group>"; };
+		75489BC01B35E52600EF3EB9 /* IGSwitchWithLabelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGSwitchWithLabelController.m; sourceTree = "<group>"; };
+		75489BC11B35E52600EF3EB9 /* IGSwitchWithLabelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGSwitchWithLabelController.xib; sourceTree = "<group>"; };
 		755F80B91B29C06B00C35F99 /* IGGeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGGeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		755F80BD1B29C06B00C35F99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		755F80BE1B29C06B00C35F99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -73,6 +79,8 @@
 		7568EA211B300CCA006FC769 /* IGCDCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDCircle.m; path = IGCD/IGCDCircle.m; sourceTree = "<group>"; };
 		7568EA231B300DF9006FC769 /* IGCDACircleStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDACircleStatus.h; path = IGCD/IGCDACircleStatus.h; sourceTree = "<group>"; };
 		7568EA241B300DF9006FC769 /* IGCDACircleStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDACircleStatus.m; path = IGCD/IGCDACircleStatus.m; sourceTree = "<group>"; };
+		75937B4A1B371A9000B95B49 /* IGCDConnectionGeo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDConnectionGeo.h; path = IGCD/IGCDConnectionGeo.h; sourceTree = "<group>"; };
+		75937B4B1B371A9000B95B49 /* IGCDConnectionGeo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDConnectionGeo.m; path = IGCD/IGCDConnectionGeo.m; sourceTree = "<group>"; };
 		75B212CA1B2D7901005F49D5 /* IGNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGNodeViewController.h; sourceTree = "<group>"; };
 		75B212CB1B2D7901005F49D5 /* IGNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGNodeViewController.m; sourceTree = "<group>"; };
 		75B212CC1B2D7901005F49D5 /* IGNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGNodeViewController.xib; sourceTree = "<group>"; };
@@ -150,6 +158,9 @@
 		755F80BB1B29C06B00C35F99 /* IGGeo */ = {
 			isa = PBXGroup;
 			children = (
+				75489BBF1B35E52600EF3EB9 /* IGSwitchWithLabelController.h */,
+				75489BC01B35E52600EF3EB9 /* IGSwitchWithLabelController.m */,
+				75489BC11B35E52600EF3EB9 /* IGSwitchWithLabelController.xib */,
 				755F80C01B29C06B00C35F99 /* AppDelegate.h */,
 				755F80C11B29C06B00C35F99 /* AppDelegate.m */,
 				755F80C61B29C06B00C35F99 /* ViewController.h */,
@@ -211,6 +222,8 @@
 		75E309641B2B936D0098296C /* IGCD */ = {
 			isa = PBXGroup;
 			children = (
+				75937B4A1B371A9000B95B49 /* IGCDConnectionGeo.h */,
+				75937B4B1B371A9000B95B49 /* IGCDConnectionGeo.m */,
 				7568EA231B300DF9006FC769 /* IGCDACircleStatus.h */,
 				7568EA241B300DF9006FC769 /* IGCDACircleStatus.m */,
 				75E309611B2B935F0098296C /* IGCDConnection.h */,
@@ -309,6 +322,7 @@
 			files = (
 				75B212CE1B2D7901005F49D5 /* IGNodeViewController.xib in Resources */,
 				755F80CB1B29C06B00C35F99 /* Main.storyboard in Resources */,
+				75489BC31B35E52600EF3EB9 /* IGSwitchWithLabelController.xib in Resources */,
 				755F80D01B29C06B00C35F99 /* LaunchScreen.xib in Resources */,
 				75DDAF761B2D9F1400952F25 /* IGNodeTableViewCell.xib in Resources */,
 				755F80CD1B29C06B00C35F99 /* Images.xcassets in Resources */,
@@ -332,8 +346,10 @@
 			files = (
 				751785DE1B2E35C400C82C18 /* IGGeoGraphicView.m in Sources */,
 				75DDAF751B2D9F1400952F25 /* IGNodeTableViewCell.m in Sources */,
+				75937B4C1B371A9000B95B49 /* IGCDConnectionGeo.m in Sources */,
 				755F80C21B29C06B00C35F99 /* AppDelegate.m in Sources */,
 				75E309631B2B935F0098296C /* IGCDConnection.m in Sources */,
+				75489BC21B35E52600EF3EB9 /* IGSwitchWithLabelController.m in Sources */,
 				75396C991B2C6C1500A70B76 /* NSObject+ExtraProperties.m in Sources */,
 				75E309571B2B935F0098296C /* IGCDPoint.m in Sources */,
 				75E309601B2B935F0098296C /* IGCDAGeoStatus.m in Sources */,
