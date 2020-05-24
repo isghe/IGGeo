@@ -104,6 +104,7 @@
 		75E3095F1B2B935F0098296C /* IGCDAGeoStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDAGeoStatus.m; path = IGCD/IGCDAGeoStatus.m; sourceTree = "<group>"; };
 		75E309611B2B935F0098296C /* IGCDConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IGCDConnection.h; path = IGCD/IGCDConnection.h; sourceTree = "<group>"; };
 		75E309621B2B935F0098296C /* IGCDConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IGCDConnection.m; path = IGCD/IGCDConnection.m; sourceTree = "<group>"; };
+		91029998247AAD8500B0BCBE /* IGGeo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IGGeo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +159,7 @@
 		755F80BB1B29C06B00C35F99 /* IGGeo */ = {
 			isa = PBXGroup;
 			children = (
+				91029998247AAD8500B0BCBE /* IGGeo.entitlements */,
 				75489BBF1B35E52600EF3EB9 /* IGSwitchWithLabelController.h */,
 				75489BC01B35E52600EF3EB9 /* IGSwitchWithLabelController.m */,
 				75489BC11B35E52600EF3EB9 /* IGSwitchWithLabelController.xib */,
@@ -302,6 +304,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -515,11 +518,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = IGGeo/IGGeo.entitlements;
 				DEVELOPMENT_TEAM = 7MW2VW5JEZ;
 				INFOPLIST_FILE = IGGeo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.isidoroghezzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Debug;
 		};
@@ -527,11 +532,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = IGGeo/IGGeo.entitlements;
 				DEVELOPMENT_TEAM = 7MW2VW5JEZ;
 				INFOPLIST_FILE = IGGeo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.isidoroghezzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 			};
 			name = Release;
 		};
